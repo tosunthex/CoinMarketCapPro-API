@@ -6,18 +6,14 @@ using CoinMarketCapPro_API.Parameters;
 
 namespace CoinMarketCapPro_API.Services
 {
-    public class QueryStringService : BaseApiUrls
+    public class QueryStringService : ApiParameters
     {
-        public static Uri AppendQueryString(string path, Dictionary<string, string> parameter, bool useProApi)
-        {
-            return CreateUrl(path, parameter, useProApi);
-        }
-        private static Uri CreateUrl(string path, Dictionary<string, string> parameter, bool useProApi)
+        public static Uri CreateUrl(string path, Dictionary<string, object> parameter)
         {
             var urlParameters = new List<string>();
             foreach (var par in parameter)
             {
-                urlParameters.Add(string.IsNullOrWhiteSpace(par.Value) ? null : $"{par.Key}={par.Value}");
+                urlParameters.Add(string.IsNullOrWhiteSpace(par.Value.ToString()) ? null : $"{par.Key}={par.Value}");
             }
 
             var encodedParams = urlParameters
@@ -25,9 +21,8 @@ namespace CoinMarketCapPro_API.Services
                 .Select(WebUtility.HtmlEncode)
                 .Select((x, i) => i > 0 ? $"&{x}" : $"?{x}")
                 .ToArray();
-
             var url = encodedParams.Length > 0 ? $"{path}{string.Join(string.Empty, encodedParams)}" : path;
-            return useProApi ? new Uri(ProEndPoint, url) : new Uri(SandboxEndPoint, url);
+            return new Uri(ApiEndPoint, url);
         }
     }
 }
