@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -22,6 +21,14 @@ namespace CoinMarketCap_Pro.Tests
             var  currencyInfo = await _coinMarketCapClient.CryptoCurrencyClient.GetMetaData(new string[]{}, new []{"BTC","XRP"});
             Assert.Equal("BTC",currencyInfo.Data.Values.First().Symbol);
             Assert.Equal("XRP", currencyInfo.Data.Values.Last().Symbol);
+        }
+
+        [Fact]
+        public async Task FirstElemantofIdMapMustBeBtc()
+        {
+            var idMap = await _coinMarketCapClient.CryptoCurrencyClient.GetIdMap(ListingStatus.Active, 1, 1, new[]{""});
+            Assert.Single(idMap.Data);
+            Assert.Equal("BTC",idMap.Data.First().Symbol);
         }
     }
 }
