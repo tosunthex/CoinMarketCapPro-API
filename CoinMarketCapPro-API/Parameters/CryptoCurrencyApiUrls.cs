@@ -6,69 +6,114 @@ namespace CoinMarketCapPro_API.Parameters
 {
     public class CryptoCurrencyApiUrls
     {
-        private const string CryptoCurrencyPath = "/v1/cryptocurrency";
+        private const string CryptoCurrencyPath = "v1/cryptocurrency";
 
-        public static Uri Info(string[] id,string[] symbol,bool useProApi)
+        public static Uri MetadataUri(string[] id,string[] symbol)
         {
-            return QueryStringService.AppendQueryString($"{CryptoCurrencyPath}/info", new Dictionary<string, string>
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/info", new Dictionary<string, object>
             {
                 {"id",string.Join(",",id) },
                 {"symbol",string.Join(",",symbol) }
-            }, useProApi);
+            });
         }
-        public static Uri Map(string listingStatus,int start,int limit,string[] symbol,bool useProApi)
+        public static Uri IdMapUri(string listingStatus,int start,int limit,string[] symbol)
         {
-            return QueryStringService.AppendQueryString($"{CryptoCurrencyPath}/map", new Dictionary<string, string>
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/map", new Dictionary<string, object>
             {
                 {"listing_status",listingStatus },
-                {"start",start.ToString() },
-                {"limit",limit.ToString() },
+                {"start",start },
+                {"limit",limit },
                 {"symbol",string.Join(",",symbol) }
-            }, useProApi);
+            });
         }
-        public static Uri ListingLatest(bool useProApi)
+        public static Uri ListingLatestUri(int start,int limit,string[] convert,string sort,string sortDir,string cryptocurrencyType)
         {
-            return QueryStringService.AppendQueryString($"{CryptoCurrencyPath}/listings/latest", null, useProApi);
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/listings/latest"
+                , new Dictionary<string, object>
+            {
+                {"start",start },
+                {"limit",limit},
+                {"convert",string.Join(",",convert) },
+                {"sort",sort },
+                {"sort_dir",sortDir },
+                {"cryptocurrency_type",cryptocurrencyType }
+            });
         }
-        public static Uri ListingHistorical(string timeStamp,int start,int limit,string[] convert,string sort,string sortDir, string cryptoCurrencyType,bool useProApi)
+        public static Uri ListingHistoricalUri(string timeStamp,int start,int limit,string[] convert,string sort,string sortDir, string cryptoCurrencyType)
         {
-            return QueryStringService.AppendQueryString($"{CryptoCurrencyPath}/listings/historical", new Dictionary<string, string>
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/listings/historical", 
+                new Dictionary<string, object>
             {
                 {"timeStamp",timeStamp },
-                {"start",start.ToString() },
-                {"limit",limit.ToString() },
+                {"start",start },
+                {"limit",limit },
                 {"convert",string.Join(",",convert) },
                 {"sort",sort },
                 {"sort_dir",sortDir },
                 {"cryptocurrency_type",cryptoCurrencyType }
-            }, useProApi);
+            });
         }
-        public static Uri LastestMarketPairs(bool useProApi)
+        public static Uri LastestMarketPairsUri(string id,string symbol,int start,int limit,string[] convert)
         {
-            return QueryStringService.AppendQueryString($"{CryptoCurrencyPath}/market-pairs/latest", null, useProApi);
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/market-pairs/latest"
+                ,new Dictionary<string, object>
+                {
+                    {"id",id },
+                    {"symbol",symbol },
+                    {"start",start },
+                    {"limit",limit },
+                    {"convert",string.Join(",",convert) }
+                } );
         }
-        public static Uri HistoricalOhlcv(bool useProApi)
+        public static Uri HistoricalOhlcvUri(string id, string symbol, string timePeriod, string timeStart, string timeEnd,
+            int count, string interval, string[] convert)
         {
-            return QueryStringService.AppendQueryString($"{CryptoCurrencyPath}/ohlcv/historical", null, useProApi);
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/ohlcv/historical"
+                , new Dictionary<string, object>
+            {
+                {"id",id },
+                {"symbol",symbol },
+                {"timePeriod",timePeriod },
+                {"timeStart",timeStart },
+                {"timeEnd",timeEnd },
+                {"count",count },
+                {"interval",interval },
+                {"convert",string.Join(",",convert) }
+            });
         }
-        public static Uri LatestQuotes(bool useProApi)
+        public static Uri LatestOhlcvUri(string id, string symbol, string[] convert)
         {
-            return QueryStringService.AppendQueryString($"{CryptoCurrencyPath}/quotes/latest", null, useProApi);
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/ohlcv/historical"
+                , new Dictionary<string, object>
+            {
+                {"id",id },
+                {"symbol",symbol },
+                {"convert",string.Join(",",convert) }
+            });
         }
-        public static Uri HistoricalQuotes(bool useProApi)
+        public static Uri HistoricalQuotesUri(string id, string symbol, string timeStart, string timeEnd, int count,
+            string interval, string[] convert)
         {
-            return QueryStringService.AppendQueryString($"{CryptoCurrencyPath}/quotes/historical", null, useProApi);
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/quotes/latest", new Dictionary<string, object>
+            {
+                {"id",id },
+                {"symbol",symbol },
+                {"timeStart",timeStart },
+                {"timeEnd",timeEnd },
+                {"count",count },
+                {"interval",interval },
+                {"convert",string.Join(",",convert) }
+            });
+        }
+        public static Uri LatestQuotesUri(string id, string symbol, string[] convert)
+        {
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/quotes/historical", new Dictionary<string, object>
+            {
+                {"id",id },
+                {"symbol",symbol },
+                {"convert",string.Join(",",convert) }
+            });
         }
 
     }
 }
-/*
-/v1/cryptocurrency/info Get metadata
-/v1/cryptocurrency/map Get CoinMarketCap ID map
-/v1/cryptocurrency/listings/latest List all cryptocurrencies(latest)
-/v1/cryptocurrency/listings/historical List all cryptocurrencies(historical)
-/v1/cryptocurrency/market-pairs/latest Get market pairs(latest)
-/v1/cryptocurrency/ohlcv/historical Get OHLCV values(historical)
-/v1/cryptocurrency/quotes/latest Get market quotes(latest)
-/v1/cryptocurrency/quotes/historical Get market quotes(historical)
-*/
