@@ -38,5 +38,11 @@ namespace CoinMarketCapPro_API.Clients
             return await GetAsync<ListingLatest>(CryptoCurrencyApiUrls.ListingLatestUri(start, limit, convert,
                 sortField, sortDir, cryptoCurrencyType));
         }
+
+        public async Task<MarketPairsLatest> GetMarketPairLatest(string id, string symbol, int start, int limit, string[] convert)
+        {
+            return await GetAsync<MarketPairsLatest>(
+                CryptoCurrencyApiUrls.LastestMarketPairsUri(id, symbol, start, limit, convert));
+        }
     }
 }

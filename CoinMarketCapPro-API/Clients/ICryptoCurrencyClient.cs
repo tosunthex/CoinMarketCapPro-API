@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Numerics;
 using System.Threading.Tasks;
 using CoinMarketCapPro_API.Models.Responses;
@@ -46,6 +47,8 @@ namespace CoinMarketCapPro_API.Clients
 
         Task<ListingLatest> GetListingLatest(int start, int limit, string[] convert, string sortField,
             string sortDir, string cryptoCurrencyType);
+
+        Task<MarketPairsLatest> GetMarketPairLatest(string id, string symbol, int start, int limit, string[] convert);
 
     }
 }

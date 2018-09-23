@@ -45,5 +45,15 @@ namespace CoinMarketCap_Pro.Tests
                 new[] {"USD"}, SortField.MarketCap, SortDirection.Desc, CryptoCurrencyType.All);
             Assert.Equal("BTC",listingHistorical.Data.First().Symbol);
         }
+
+        [Fact]
+        public async Task MarketPairsLastestForBTC()
+        {
+            var marketPairs =
+                await _coinMarketCapClient.CryptoCurrencyClient.GetMarketPairLatest("", "BTC", 1, 1, new[] {""});
+            Assert.Equal("BTC/USD",marketPairs.Data.MarketPairs.First().MarketPair);
+            Assert.Equal("BitMEX",marketPairs.Data.MarketPairs.First().Exchange.Name);
+
+        }
     }
 }
