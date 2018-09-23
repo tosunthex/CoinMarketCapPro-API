@@ -44,5 +44,8 @@ namespace CoinMarketCapPro_API.Clients
         Task<ListingHistorical> GetListingsHistorical(string timestamp, int start, int limit,
             string[] convert, string sortField, string sortDirection, string cryptocurrencyType);
 
+        Task<ListingLatest> GetListingLatest(int start, int limit, string[] convert, string sortField,
+            string sortDir, string cryptoCurrencyType);
+
     }
 }

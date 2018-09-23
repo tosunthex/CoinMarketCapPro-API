@@ -31,5 +31,12 @@ namespace CoinMarketCapPro_API.Clients
                 CryptoCurrencyApiUrls.ListingHistoricalUri(timestamp, start, limit, convert, sortField, sortDirection,
                     cryptocurrencyType)).ConfigureAwait(false);
         }
+
+        public async Task<ListingLatest> GetListingLatest(int start, int limit, string[] convert, string sortField, string sortDir,
+            string cryptoCurrencyType)
+        {
+            return await GetAsync<ListingLatest>(CryptoCurrencyApiUrls.ListingLatestUri(start, limit, convert,
+                sortField, sortDir, cryptoCurrencyType));
+        }
     }
 }
