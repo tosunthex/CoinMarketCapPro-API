@@ -30,5 +30,13 @@ namespace CoinMarketCap_Pro.Tests
             Assert.Single(idMap.Data);
             Assert.Equal("BTC",idMap.Data.First().Symbol);
         }
+
+//        [Fact]
+//        public async Task BtcToUsdListingsHistorical()
+//        {
+//            var listingHistorical = await _coinMarketCapClient.CryptoCurrencyClient.GetListingsHistorical("", 1, 2,
+//                new[] {"USD"}, SortField.MarketCap, SortDirection.Desc, "");
+//            Assert.Equal("BTC",listingHistorical.Data.First().Symbol);
+//        }
     }
 }

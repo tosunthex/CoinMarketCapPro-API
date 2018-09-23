@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CoinMarketCapPro_API.Models.Responses;
@@ -21,6 +22,14 @@ namespace CoinMarketCapPro_API.Clients
         {
             return await GetAsync<CryptoCurrencyIdMap>(CryptoCurrencyApiUrls.IdMapUri(listingStatus, start, limit, symbol))
                 .ConfigureAwait(false);
+        }
+
+        public async Task<ListingHistorical> GetListingsHistorical(string timestamp, int start, int limit, string[] convert, string sortField, string sortDirection,
+            string cryptocurrencyType)
+        {
+            return await GetAsync<ListingHistorical>(
+                CryptoCurrencyApiUrls.ListingHistoricalUri(timestamp, start, limit, convert, sortField, sortDirection,
+                    cryptocurrencyType)).ConfigureAwait(false);
         }
     }
 }
