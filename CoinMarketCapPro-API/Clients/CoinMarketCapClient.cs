@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Text;
 using CoinMarketCapPro_API.Parameters;
 
@@ -11,12 +12,10 @@ namespace CoinMarketCapPro_API.Clients
     {
         private readonly HttpClient _httpClient;
         private bool _isDisposed;
-        private readonly Uri _apiEndPoint;
-        private readonly string _apiKey;
 
         public CoinMarketCapClient(HttpClientHandler httpClientHandler,string apiEnvironment,string apiKey)
         {
-            ApiParameters.ApiEndPoint = new Uri($"https://{(apiEnvironment == ApiEnvironment.Pro ? "pro":"sandbox")}-api.coinmarketcap.com/", UriKind.Absolute);
+            ApiParameters.ApiEndPoint = new Uri($"https://{(apiEnvironment == ApiEnvironment.Pro ? "pro" : "sandbox")}-api.coinmarketcap.com/",UriKind.Absolute);
             ApiParameters.ApiKey = apiKey;
             _httpClient = new HttpClient(httpClientHandler, true);
         }
