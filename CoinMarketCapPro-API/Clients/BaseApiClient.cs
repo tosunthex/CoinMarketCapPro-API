@@ -25,8 +25,8 @@ namespace CoinMarketCapPro_API.Clients
             request.Headers.Add("Accept-Encoding", "deflate, gzip");
             request.Headers.Add("X-CMC_PRO_API_KEY",ApiParameters.ApiKey);
 
-            
-            HttpClientHandler handler = new HttpClientHandler()
+
+            var handler = new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
             };
@@ -47,11 +47,6 @@ namespace CoinMarketCapPro_API.Clients
                     throw new HttpRequestException(errorMessage);
                 }
             }
-            
-            //response.EnsureSuccessStatusCode();
-            
-            
-
         }
     }
 }

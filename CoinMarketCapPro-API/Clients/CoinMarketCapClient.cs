@@ -11,6 +11,8 @@ namespace CoinMarketCapPro_API.Clients
     {
         private readonly HttpClient _httpClient;
         private bool _isDisposed;
+        private readonly Uri _apiEndPoint;
+        private readonly string _apiKey;
 
         public CoinMarketCapClient(HttpClientHandler httpClientHandler,string apiEnvironment,string apiKey)
         {
