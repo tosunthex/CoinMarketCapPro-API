@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
-using CoinMarketCapPro_API.Models.Responses;
+using CoinMarketCapPro_API.Models.Responses.CryptoCurrency;
 using CoinMarketCapPro_API.Parameters;
 
 namespace CoinMarketCapPro_API.Clients
@@ -36,13 +37,20 @@ namespace CoinMarketCapPro_API.Clients
             string cryptoCurrencyType)
         {
             return await GetAsync<ListingLatest>(CryptoCurrencyApiUrls.ListingLatestUri(start, limit, convert,
-                sortField, sortDir, cryptoCurrencyType));
+                sortField, sortDir, cryptoCurrencyType)).ConfigureAwait(false);
         }
 
         public async Task<MarketPairsLatest> GetMarketPairLatest(string id, string symbol, int start, int limit, string[] convert)
         {
             return await GetAsync<MarketPairsLatest>(
-                CryptoCurrencyApiUrls.LastestMarketPairsUri(id, symbol, start, limit, convert));
+                CryptoCurrencyApiUrls.LastestMarketPairsUri(id, symbol, start, limit, convert)).ConfigureAwait(false);
+        }
+
+        public async Task<OhlcvHistorical> GetOhlvcHistorical(string id, string symbol, string timePeriod, string timeStart, string timeEnd, int count,
+            string interval,string[] convert)
+        {
+            return await GetAsync < OhlcvHistorical > (CryptoCurrencyApiUrls.HistoricalOhlcvUri(id, symbol, timePeriod,
+                       timeStart, timeEnd, count, interval, convert)).ConfigureAwait(false);
         }
     }
 }

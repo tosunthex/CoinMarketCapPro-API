@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Threading.Tasks;
-using CoinMarketCapPro_API.Models.Responses;
+using CoinMarketCapPro_API.Models.Responses.CryptoCurrency;
 
 namespace CoinMarketCapPro_API.Clients
 {
@@ -49,6 +49,8 @@ namespace CoinMarketCapPro_API.Clients
             string sortDir, string cryptoCurrencyType);
 
         Task<MarketPairsLatest> GetMarketPairLatest(string id, string symbol, int start, int limit, string[] convert);
+        
+        Task<OhlcvHistorical> GetOhlvcHistorical(string id, string symbol, string timePeriod,string timeStart,string timeEnd,int count,string interval,string[] convert);
 
     }
 }

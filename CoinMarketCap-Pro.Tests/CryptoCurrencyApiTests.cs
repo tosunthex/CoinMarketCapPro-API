@@ -53,7 +53,15 @@ namespace CoinMarketCap_Pro.Tests
                 await _coinMarketCapClient.CryptoCurrencyClient.GetMarketPairLatest("", "BTC", 1, 1, new[] {""});
             Assert.Equal("BTC/USD",marketPairs.Data.MarketPairs.First().MarketPair);
             Assert.Equal("BitMEX",marketPairs.Data.MarketPairs.First().Exchange.Name);
+        }
 
+        [Fact]
+        public async Task OhlcvHistoricalForBTC()
+        {
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlvcHistorical("", "BTC", "daily",
+                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z", 10, "", new string[] {"USD"});
+            Assert.Equal(3, result.Data.Quotes.Length);
+            Assert.Equal("BTC", result.Data.Symbol);
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace CoinMarketCapPro_API.Models.Responses
+namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 {
-    public class MarketPairsLatest
+   public class CryptoCurrencyIdMap
     {
         [JsonProperty("data")]
-        public MarketPairsLatestData Data { get; set; }
+        public IdMapData[] Data { get; set; }
 
         [JsonProperty("status")]
         public Status Status { get; set; }

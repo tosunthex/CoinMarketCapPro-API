@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace CoinMarketCapPro_API.Models.Responses
+namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 {
     public class CryptoCurrencyMetaData
     {

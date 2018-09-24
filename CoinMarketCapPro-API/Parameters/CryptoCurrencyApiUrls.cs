@@ -73,9 +73,9 @@ namespace CoinMarketCapPro_API.Parameters
             {
                 {"id",id },
                 {"symbol",symbol },
-                {"timePeriod",timePeriod },
-                {"timeStart",timeStart },
-                {"timeEnd",timeEnd },
+                {"time_period",timePeriod },
+                {"time_start",timeStart },
+                {"time_end",timeEnd },
                 {"count",count },
                 {"interval",interval },
                 {"convert",string.Join(",",convert) }

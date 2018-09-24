@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 
-namespace CoinMarketCapPro_API.Models.Responses
+namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 {
-    public class ListingLatest
+    public class OhlcvHistorical
     {
         [JsonProperty("data")]
-        public ListingLatestData[] Data { get; set; }
+        public OhlcvHistoricalData Data { get; set; }
 
         [JsonProperty("status")]
         public Status Status { get; set; }
