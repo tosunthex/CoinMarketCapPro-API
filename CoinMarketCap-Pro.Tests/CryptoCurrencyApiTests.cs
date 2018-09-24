@@ -58,8 +58,8 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task OhlcvHistoricalForBTC()
         {
-            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlvcHistorical("", "BTC", "daily",
-                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z", 10, "", new string[] {"USD"});
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlvcHistorical("", "BTC", Interval.Daily,
+                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z", 10, Interval.Daily, new string[] {"USD"});
             Assert.Equal(3, result.Data.Quotes.Length);
             Assert.Equal("BTC", result.Data.Symbol);
         }
