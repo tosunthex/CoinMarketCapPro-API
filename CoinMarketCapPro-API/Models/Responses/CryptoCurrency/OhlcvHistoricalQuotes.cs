@@ -13,6 +13,6 @@ namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
         public DateTimeOffset TimeClose { get; set; }
 
         [JsonProperty("quote")]
-        public Dictionary<string,OhlcvHistoricalQuote> Quote { get; set; }
+        public Dictionary<string,OhlcvQuote> Quote { get; set; }
     }
 }

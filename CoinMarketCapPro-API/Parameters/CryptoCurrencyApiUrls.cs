@@ -83,7 +83,7 @@ namespace CoinMarketCapPro_API.Parameters
         }
         public static Uri LatestOhlcvUri(string id, string symbol, string[] convert)
         {
-            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/ohlcv/historical"
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/ohlcv/latest"
                 , new Dictionary<string, object>
             {
                 {"id",id },

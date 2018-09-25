@@ -63,5 +63,13 @@ namespace CoinMarketCap_Pro.Tests
             Assert.Equal(3, result.Data.Quotes.Length);
             Assert.Equal("BTC", result.Data.Symbol);
         }
+
+        [Fact]
+        public async Task OhlcvLatestForBTC()
+        {
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlcvLatest("", "BTC", new [] {"USD"});
+            Assert.Equal("BTC",result.Data.First().Value.Symbol);
+            Assert.Equal("Bitcoin",result.Data.First().Value.Name);
+        }
     }
 }

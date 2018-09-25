@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 {
-    public class OhlcvHistoricalQuote
+    public class OhlcvQuote
     {
         [JsonProperty("open")]
         public double Open { get; set; }
