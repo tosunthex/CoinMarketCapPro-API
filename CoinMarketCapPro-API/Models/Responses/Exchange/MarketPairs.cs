@@ -1,12 +1,9 @@
 ﻿using Newtonsoft.Json;
 
-namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
+namespace CoinMarketCapPro_API.Models.Responses.Exchange
 {
     public class MarketPairs
     {
-        [JsonProperty("exchange")]
-        public CryptoCurrencyBase Exchange { get; set; }
-
         [JsonProperty("market_pair")]
         public string MarketPair { get; set; }
 
@@ -17,6 +14,6 @@ namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
         public MarketPairBaseClass MarketPairQuote { get; set; }
 
         [JsonProperty("quote")]
-        public Quote Quote { get; set; }
+        public MarketPairsQuote Quote { get; set; }
     }
 }

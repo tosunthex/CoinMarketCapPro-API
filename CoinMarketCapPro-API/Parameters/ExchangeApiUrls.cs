@@ -29,7 +29,7 @@ namespace CoinMarketCapPro_API.Parameters
         }
 
         public static Uri ListingsHistorical(string timeStamp, int start, int limit, string sortField, string sortDir,
-            string marketType, string convert)
+            string marketType, string[] convert)
         {
             return QueryStringService.CreateUrl($"{ExchangeApiPath}/listings/historical", new Dictionary<string, object>
             {
@@ -39,11 +39,11 @@ namespace CoinMarketCapPro_API.Parameters
                 {"sort", sortField},
                 {"sort_dir", sortDir},
                 {"market_type", marketType},
-                {"convert", convert}
+                {"convert", string.Join(",",convert)}
             });
         }
 
-        public static Uri ListingsLatest(int start, int limit, string sortField, string sortDir,string marketType, string convert)
+        public static Uri ListingsLatest(int start, int limit, string sortField, string sortDir,string marketType, string[] convert)
         {
             return QueryStringService.CreateUrl($"{ExchangeApiPath}/listings/latest", new Dictionary<string, object>
             {
@@ -52,7 +52,7 @@ namespace CoinMarketCapPro_API.Parameters
                 {"sort", sortField},
                 {"sort_dir", sortDir},
                 {"market_type", marketType},
-                {"convert", convert}
+                {"convert", string.Join(",",convert)}
             });
         }
 
@@ -64,7 +64,7 @@ namespace CoinMarketCapPro_API.Parameters
                 {"slug",slug},
                 {"start",start},
                 {"limit",limit},
-                {"convert",convert}
+                {"convert", string.Join(",",convert)}
             });
         }
 

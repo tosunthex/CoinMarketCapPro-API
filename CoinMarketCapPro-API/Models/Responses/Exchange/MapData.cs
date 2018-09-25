@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.Exchange
 {
-    public partial class MapData:ExchangeDetail
+    public partial class MapData:CryptoCurrencyBase
     {
         [JsonProperty("is_active")]
         public bool IsActive { get; set; }

@@ -2,7 +2,7 @@
 
 namespace CoinMarketCapPro_API.Models.Responses
 {
-    public class ExchangeDetail
+    public class CryptoCurrencyBase
     {
         [JsonProperty("id")]
         public long Id { get; set; }

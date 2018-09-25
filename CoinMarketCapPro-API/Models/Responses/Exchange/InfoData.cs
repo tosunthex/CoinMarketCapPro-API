@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.Exchange
 {
-    public class InfoData:ExchangeDetail
+    public class InfoData:CryptoCurrencyBase
     {
         [JsonProperty("urls")]
         public Urls Urls { get; set; }

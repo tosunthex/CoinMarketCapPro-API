@@ -11,11 +11,14 @@ namespace CoinMarketCapPro_API.Clients
         Task<ResponseMain<Dictionary<string, InfoData>>> GetInfo(string id, string slug);
         Task<ResponseMain<MapData[]>> GetMap(string listingStart, string slug, int start, int limit);
 
-        Task<ResponseMain<ListingHistoricalData[]>> GetListingHistorical(string timeStamp, int start, int limit,
-            string sortField, string sortDir,
-            string marketType, string convert);
+        Task<ResponseMain<ListingsHistoricalData[]>> GetListingHistorical(string timeStamp, int start, int limit,
+            string sortField, string sortDir,string marketType, string[] convert);
 
-        Task<ResponseMain<ListingHistoricalData[]>> GetListingLatest(int start, int limit, string sortField,
-            string sortDir, string marketType, string convert);
+        Task<ResponseMain<ListingsLatestData[]>> GetListingLatest(int start, int limit, string sortField,
+            string sortDir, string marketType, string[] convert);
+
+        Task<ResponseMain<MarketPairsLatestData>> GetMarketPairsLatest(string id, string slug, int start, int limit,
+            string[] convert);
+
     }
 }

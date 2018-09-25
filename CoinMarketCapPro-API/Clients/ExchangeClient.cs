@@ -24,17 +24,24 @@ namespace CoinMarketCapPro_API.Clients
             return await GetAsync<ResponseMain<MapData[]>>(ExchangeApiUrls.MapUri(listingStart, slug, start, limit));
         }
 
-        public async Task<ResponseMain<ListingHistoricalData[]>> GetListingHistorical(string timeStamp, int start, int limit, string sortField, string sortDir, string marketType,
-            string convert)
+        public async Task<ResponseMain<ListingsHistoricalData[]>> GetListingHistorical(string timeStamp, int start, int limit, string sortField, string sortDir, string marketType,
+            string[] convert)
         {
-            return await GetAsync<ResponseMain<ListingHistoricalData[]>>(
+            return await GetAsync<ResponseMain<ListingsHistoricalData[]>>(
                 ExchangeApiUrls.ListingsHistorical(timeStamp, start, limit, sortField, sortDir, marketType, convert));
         }
 
-        public async Task<ResponseMain<ListingHistoricalData[]>> GetListingLatest(int start, int limit, string sortField, string sortDir, string marketType, string convert)
+        public async Task<ResponseMain<ListingsLatestData[]>> GetListingLatest(int start, int limit, string sortField, string sortDir, string marketType, string[] convert)
         {
-            return await GetAsync<ResponseMain<ListingHistoricalData[]>>(
+            return await GetAsync<ResponseMain<ListingsLatestData[]>>(
                 ExchangeApiUrls.ListingsLatest(start, limit, sortField, sortDir, marketType, convert));
+        }
+
+        public async Task<ResponseMain<MarketPairsLatestData>> GetMarketPairsLatest(string id, string slug, int start,
+            int limit, string[] convert)
+        {
+            return await GetAsync<ResponseMain<MarketPairsLatestData>>(
+                ExchangeApiUrls.MarketPairsLatest(id, slug, start, limit, convert));
         }
     }
 }

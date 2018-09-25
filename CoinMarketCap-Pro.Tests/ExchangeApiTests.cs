@@ -39,9 +39,17 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task ListingLatestBinance()
         {
-            var result = await _coinMarketCapClient.ExchangeClient.GetListingLatest(1, 100, "", "", "", "");
+            var result = await _coinMarketCapClient.ExchangeClient.GetListingLatest(1, 100, "", "", "", new []{""});
             Assert.Equal("Binance",result.Data.First().Name);
             Assert.Equal("binance",result.Data.First().Slug);
+        }
+
+        [Fact]
+        public async Task MarketPairsLatest()
+        {
+            var result = await _coinMarketCapClient.ExchangeClient.GetMarketPairsLatest("", "binance", 1, 100, new[] {"USD"});
+            Assert.Equal("Binance",result.Data.Name);
+            Assert.Equal("BTC/USDT",result.Data.MarketPairs.First().MarketPair);
         }
     }
 }

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.Exchange
 {
-    public class ListingLatestQuote
+    public class ListingsLatestQuote
     {
         [JsonProperty("volume_24h")]
         public double Volume24H { get; set; }

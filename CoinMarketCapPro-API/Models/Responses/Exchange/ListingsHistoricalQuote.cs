@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.Exchange
 {
-    public class ListingHistoricalQuote
+    public class ListingsHistoricalQuote
     {
         [JsonProperty("timestamp")]
         public DateTimeOffset Timestamp { get; set; }
