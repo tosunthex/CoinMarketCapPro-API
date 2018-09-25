@@ -18,5 +18,10 @@ namespace CoinMarketCapPro_API.Clients
             return await GetAsync<ResponseMain<Dictionary<string, InfoData>>>(ExchangeApiUrls.InfoUri(id, slug))
                 .ConfigureAwait(false);
         }
+
+        public async Task<ResponseMain<MapData[]>> GetMap(string listingStart, string slug, int start, int limit)
+        {
+            return await GetAsync<ResponseMain<MapData[]>>(ExchangeApiUrls.MapUri(listingStart, slug, start, limit));
+        }
     }
 }

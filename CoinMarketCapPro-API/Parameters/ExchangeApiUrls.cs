@@ -17,11 +17,11 @@ namespace CoinMarketCapPro_API.Parameters
             });
         }
 
-        public static Uri MapUri(string listingStart, string slug, int start, int limit)
+        public static Uri MapUri(string listingStatus, string slug, int start, int limit)
         {
             return QueryStringService.CreateUrl($"{ExchangeApiPath}/map", new Dictionary<string, object>
             {
-                {"listing_start", listingStart},
+                {"listing_status", listingStatus},
                 {"slug", slug},
                 {"start", start},
                 {"limit", limit}

@@ -9,5 +9,6 @@ namespace CoinMarketCapPro_API.Clients
     public interface IExchangeClient
     {
         Task<ResponseMain<Dictionary<string, InfoData>>> GetInfo(string id, string slug);
+        Task<ResponseMain<MapData[]>> GetMap(string listingStart, string slug, int start, int limit);
     }
 }

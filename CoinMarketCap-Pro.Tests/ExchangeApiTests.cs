@@ -22,5 +22,13 @@ namespace CoinMarketCap_Pro.Tests
             Assert.Equal("Binance",result.Data.First().Value.Name);
             Assert.Equal("binance",result.Data.First().Key);
         }
+
+        [Fact]
+        public async Task MapMustReturnBinance()
+        {
+            var result = await _coinMarketCapClient.ExchangeClient.GetMap("", "binance", 1, 100);
+            Assert.Equal("Binance",result.Data.First().Name);
+            
+        }
     }
 }
