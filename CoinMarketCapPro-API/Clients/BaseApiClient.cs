@@ -42,7 +42,6 @@ namespace CoinMarketCapPro_API.Clients
                 }
                 catch (Exception e)
                 {
-
                     var errorResponse = JsonConvert.DeserializeObject<Dictionary<string, Status>>(responseContent);
                     var errorMessage = $"Error Code : {errorResponse.Values.First().ErrorCode} Error Message : {errorResponse.Values.First().ErrorMessage}";
                     throw new HttpRequestException(errorMessage);

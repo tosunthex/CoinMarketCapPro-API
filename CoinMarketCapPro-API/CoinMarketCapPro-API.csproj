@@ -1,9 +1,46 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>CoinMarketCapPro_API</RootNamespace>
+    <TargetFrameworks>netstandard2.0;netstandard1.3;netstandard1.5;net461;net45</TargetFrameworks>
+    <IncludeSymbols>True</IncludeSymbols>
+    <PackageVersion>1.0.1</PackageVersion>
+    <title>Coinmarketcap PRO Api Client</title>
+    <Authors>Levent Saatci</Authors>
+    <Description>C# client connects to CoinMarketCap Pro API </Description>
+    <Copyright>Copyright 2018 (c). All rights reserved.</Copyright>
+    <PackageTags>coinmarketcap v2 pro coin market cap crypto client C# .net .netstandart standart</PackageTags>
+    <PackageLicenseUrl>http://choosealicense.com/licenses/bsd-2-clause/</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/tosunthex/CoinMarketCapPro-API</PackageProjectUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <PackageIconUrl>https://coindeal.com/images/images/icons/social/CoinMarketCap.png</PackageIconUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageId>CoinMarketCapProApi</PackageId>
+    <Product>CoinMarketCap Pro Api </Product>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\CoinMarketCapPro-API.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\CoinMarketCapPro-API.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <PackageReference Include="Microsoft.AspNet.WebApi.SelfHost">
+      <Version>5.2.2</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+    <PackageReference Include="Microsoft.AspNet.WebApi.SelfHost">
+      <Version>5.2.2</Version>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>
