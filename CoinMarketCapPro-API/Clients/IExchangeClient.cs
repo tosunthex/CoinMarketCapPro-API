@@ -14,5 +14,8 @@ namespace CoinMarketCapPro_API.Clients
         Task<ResponseMain<ListingHistoricalData[]>> GetListingHistorical(string timeStamp, int start, int limit,
             string sortField, string sortDir,
             string marketType, string convert);
+
+        Task<ResponseMain<ListingHistoricalData[]>> GetListingLatest(int start, int limit, string sortField,
+            string sortDir, string marketType, string convert);
     }
 }

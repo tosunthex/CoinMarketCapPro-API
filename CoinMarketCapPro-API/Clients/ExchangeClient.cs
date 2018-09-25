@@ -30,5 +30,11 @@ namespace CoinMarketCapPro_API.Clients
             return await GetAsync<ResponseMain<ListingHistoricalData[]>>(
                 ExchangeApiUrls.ListingsHistorical(timeStamp, start, limit, sortField, sortDir, marketType, convert));
         }
+
+        public async Task<ResponseMain<ListingHistoricalData[]>> GetListingLatest(int start, int limit, string sortField, string sortDir, string marketType, string convert)
+        {
+            return await GetAsync<ResponseMain<ListingHistoricalData[]>>(
+                ExchangeApiUrls.ListingsLatest(start, limit, sortField, sortDir, marketType, convert));
+        }
     }
 }

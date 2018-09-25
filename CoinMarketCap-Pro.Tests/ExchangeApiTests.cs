@@ -36,6 +36,12 @@ namespace CoinMarketCap_Pro.Tests
 //            var result = await _coinMarketCapClient.ExchangeClient.GetListingHistorical("2018-06-02T00:00:00.000Z",1,10,"","","","");
 //            Assert.Equal("Binance",result.Data.First().Name);
 //        }
-        
+        [Fact]
+        public async Task ListingLatestBinance()
+        {
+            var result = await _coinMarketCapClient.ExchangeClient.GetListingLatest(1, 100, "", "", "", "");
+            Assert.Equal("Binance",result.Data.First().Name);
+            Assert.Equal("binance",result.Data.First().Slug);
+        }
     }
 }
