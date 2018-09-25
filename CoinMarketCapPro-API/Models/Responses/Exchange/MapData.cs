@@ -3,17 +3,8 @@ using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.Exchange
 {
-    public partial class MapData
+    public partial class MapData:ExchangeDetail
     {
-        [JsonProperty("id")]
-        public long Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("slug")]
-        public string Slug { get; set; }
-
         [JsonProperty("is_active")]
         public bool IsActive { get; set; }
 

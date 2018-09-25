@@ -28,7 +28,14 @@ namespace CoinMarketCap_Pro.Tests
         {
             var result = await _coinMarketCapClient.ExchangeClient.GetMap("", "binance", 1, 100);
             Assert.Equal("Binance",result.Data.First().Name);
-            
         }
+
+//        [Fact]
+//        public async Task ExchangeListingHistoricalBinance()
+//        {
+//            var result = await _coinMarketCapClient.ExchangeClient.GetListingHistorical("2018-06-02T00:00:00.000Z",1,10,"","","","");
+//            Assert.Equal("Binance",result.Data.First().Name);
+//        }
+        
     }
 }
