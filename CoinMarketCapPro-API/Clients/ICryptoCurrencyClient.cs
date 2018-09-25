@@ -55,6 +55,8 @@ namespace CoinMarketCapPro_API.Clients
         Task<OhlcvLatest> GetOhlcvLatest(string id, string symbol, string[] convert);
         
         Task<QuotesHistorical> GetQuotesHistorical(string id, string symbol,string timeStart,string timeEnd,int count,string interval, string[] convert);
+        
+        Task<QuotesLatest> GetQuotesLatest(string id, string symbol, string[] convert);
 
     }
 }

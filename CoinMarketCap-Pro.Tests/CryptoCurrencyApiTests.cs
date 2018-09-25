@@ -47,7 +47,7 @@ namespace CoinMarketCap_Pro.Tests
         }
 
         [Fact]
-        public async Task MarketPairsLastestForBTC()
+        public async Task MarketPairsLastestForBtc()
         {
             var marketPairs =
                 await _coinMarketCapClient.CryptoCurrencyClient.GetMarketPairLatest("", "BTC", 1, 1, new[] {""});
@@ -56,7 +56,7 @@ namespace CoinMarketCap_Pro.Tests
         }
 
         [Fact]
-        public async Task OhlcvHistoricalForBTC()
+        public async Task OhlcvHistoricalForBtc()
         {
             var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlvcHistorical("", "BTC", Interval.Daily,
                 "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z", 10, Interval.Daily, new string[] {"USD"});
@@ -65,7 +65,7 @@ namespace CoinMarketCap_Pro.Tests
         }
 
         [Fact]
-        public async Task OhlcvLatestForBTC()
+        public async Task OhlcvLatestForBtc()
         {
             var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlcvLatest("", "BTC", new [] {"USD"});
             Assert.Equal("BTC",result.Data.First().Value.Symbol);
@@ -73,10 +73,17 @@ namespace CoinMarketCap_Pro.Tests
         }
 
         [Fact]
-        public async Task QuotesHistoricalForBTC()
+        public async Task QuotesHistoricalForBtc()
         {
             var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesHistorical("", "BTC","2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z",10,Interval.Daily, new [] {"USD"});
             Assert.Equal("Bitcoin",result.Data.Name);
+        }
+
+        [Fact]
+        public async Task QuotesLatestForBtc()
+        {
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesLatest("", "BTC", new [] {"USD"});
+            Assert.Equal("Bitcoin",result.Data.First().Value.Name);
         }
     }
 }
