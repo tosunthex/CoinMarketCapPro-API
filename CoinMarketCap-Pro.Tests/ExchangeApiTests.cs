@@ -58,5 +58,12 @@ namespace CoinMarketCap_Pro.Tests
             var result = await _coinMarketCapClient.ExchangeClient.GetQuotesHistorical("", "binance","2018-08-15T08:55:14.000Z","", 1, "", new[] {"USD"});
             Assert.Equal("Binance",result.Data.Name);
         }
+        
+        [Fact]
+        public async Task QuotesLatest()
+        {
+            var result = await _coinMarketCapClient.ExchangeClient.GetQuotesLatest("", "binance",new[] {"USD"});
+            Assert.Equal("Binance",result.Data.First().Value.Name);
+        }
     }
 }

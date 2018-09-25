@@ -23,5 +23,8 @@ namespace CoinMarketCapPro_API.Clients
         Task<ResponseMain<QuotesHistoricalData>> GetQuotesHistorical(string id, string slug, string timeStart,
             string timeEnd, int count, string interval, string[] convert);
 
+        Task<ResponseMain<Dictionary<string, QuotesLatestData>>> GetQuotesLatest(string id, string slug,
+            string[] convert);
+
     }
 }

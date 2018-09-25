@@ -50,5 +50,11 @@ namespace CoinMarketCapPro_API.Clients
             return await GetAsync<ResponseMain<QuotesHistoricalData>>(
                 ExchangeApiUrls.QuotesHistorical(id, slug, timeStart, timeEnd, count, interval, convert));
         }
+
+        public async Task<ResponseMain<Dictionary<string, QuotesLatestData>>> GetQuotesLatest(string id, string slug, string[] convert)
+        {
+            return await GetAsync<ResponseMain<Dictionary<string, QuotesLatestData>>>(
+                ExchangeApiUrls.QuotesLatest(id, slug, convert));
+        }
     }
 }
