@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Numerics;
 using System.Threading.Tasks;
+using CoinMarketCapPro_API.Models.Responses;
 using CoinMarketCapPro_API.Models.Responses.CryptoCurrency;
 
 namespace CoinMarketCapPro_API.Clients
@@ -10,12 +11,13 @@ namespace CoinMarketCapPro_API.Clients
     {
         /// <summary>
         /// Returns all static metadata for one or more cryptocurrencies including name, symbol, logo, and its various registered URLs.
+        /// 
         /// This endpoint is available on the following API plans:Starter,Hobbyist,Standard,Professional,Enterprise
         /// </summary>
         /// <param name="id">One or more comma-separated CoinMarketCap cryptocurrency IDs. Example: "1,2"</param>
         /// <param name="symbol">Alternatively pass one or more comma-separated cryptocurrency symbols. Example: "BTC,ETH". At least one "id" or "symbol" is required.</param>
         /// <returns></returns>
-        Task<CryptoCurrencyMetaData> GetMetaData(string[] id, string[] symbol);
+        Task<CryptoCurrencyMain<Dictionary<string,MetaDataData>>> GetMetaData(string[] id, string[] symbol);
 
         /// <summary>
         /// Returns a paginated list of all cryptocurrencies by CoinMarketCap ID. We recommend using this convenience endpoint to lookup and utilize
@@ -29,7 +31,7 @@ namespace CoinMarketCapPro_API.Clients
         /// <param name="limit">Optionally specify the number of results to return. Use this parameter and the "start" parameter to determine your own pagination size.</param>
         /// <param name="symbol">Optionally pass a comma-separated list of cryptocurrency symbols to return CoinMarketCap IDs for. If this option is passed, other options will be ignored.</param>
         /// <returns></returns>
-        Task<CryptoCurrencyIdMap> GetIdMap(string listingStatus, int start, int limit, string[] symbol);
+        Task<CryptoCurrencyMain<IdMapData[]>> GetIdMap(string listingStatus, int start, int limit, string[] symbol);
 
         /// <summary>
         /// Get a paginated list of all cryptocurrencies with market data for a given historical time. Use the "convert" option to return market values in multiple fiat and cryptocurrency conversions in the same call.
@@ -38,25 +40,93 @@ namespace CoinMarketCapPro_API.Clients
         /// <param name="start">Optionally offset the start (1-based index) of the paginated list of items to return.</param>
         /// <param name="limit">Optionally specify the number of results to return. Use this parameter and the "start" parameter to determine your own pagination size</param>
         /// <param name="convert">Optionally calculate market quotes in up to 32 currencies at once by passing a comma-separated list of cryptocurrency or fiat currency symbols. Each additional convert option beyond the first requires an additional call credit. A list of supported fiat options can be found here. Each conversion is returned in its own "quote" object.</param>
-        /// <param name="sort">What field to sort the list of cryptocurrencies by.</param>
-        /// <param name="sortDir">The direction in which to order cryptocurrencies against the specified sort.</param>
+        /// <param name="sortField"></param>
+        /// <param name="sortDirection"></param>
         /// <param name="cryptocurrencyType">The type of cryptocurrency to include.</param>
         /// <returns></returns>
-        Task<ListingHistorical> GetListingsHistorical(string timestamp, int start, int limit,
+        Task<CryptoCurrencyMain<ListingHistoricalData[]>> GetListingsHistorical(string timestamp, int start, int limit,
             string[] convert, string sortField, string sortDirection, string cryptocurrencyType);
 
-        Task<ListingLatest> GetListingLatest(int start, int limit, string[] convert, string sortField,
+        /// <summary>
+        /// Get a paginated list of all cryptocurrencies with latest market data. You can configure this call to sort by market cap or another market ranking field. Use the "convert" option to return market values in multiple fiat and cryptocurrency conversions in the same call.
+        /// 
+        /// This endpoint is available on the following API plans:Starter,Hobbyist,Standard,Professional,Enterprise
+        /// </summary>
+        /// <param name="start">Optionally offset the start (1-based index) of the paginated list of items to return.</param>
+        /// <param name="limit">Optionally specify the number of results to return. Use this parameter and the "start" parameter to determine your own pagination size.</param>
+        /// <param name="convert">Optionally calculate market quotes in up to 32 currencies at once by passing a comma-separated list of cryptocurrency or fiat currency symbols. Each additional convert option beyond the first requires an additional call credit. A list of supported fiat options can be found here. Each conversion is returned in its own "quote" object.</param>
+        /// <param name="sortField">What field to sort the list of cryptocurrencies by.</param>
+        /// <param name="sortDir">The direction in which to order cryptocurrencies against the specified sort.</param>
+        /// <param name="cryptoCurrencyType">The type of cryptocurrency to include.</param>
+        /// <returns></returns>
+        Task<CryptoCurrencyMain<ListingLatestData[]>> GetListingLatest(int start, int limit, string[] convert, string sortField,
             string sortDir, string cryptoCurrencyType);
 
-        Task<MarketPairsLatest> GetMarketPairLatest(string id, string symbol, int start, int limit, string[] convert);
+        /// <summary>
+        /// Lists all market pairs for the specified cryptocurrency with associated stats. Use the "convert" option to return market values in multiple fiat and cryptocurrency conversions in the same call.
+        /// 
+        /// This endpoint is available on the following API plans:Standard,Professional,Enterprise
+        /// </summary>
+        /// <param name="id">A cryptocurrency by CoinMarketCap ID. Example: "1"</param>
+        /// <param name="symbol">Alternatively pass a cryptocurrency by symbol. Example: "BTC". A single cryptocurrency "id" or "symbol" is required.</param>
+        /// <param name="start">Optionally offset the start (1-based index) of the paginated list of items to return.Default = 1</param>
+        /// <param name="limit">Optionally specify the number of results to return. Use this parameter and the "start" parameter to determine your own pagination size.Default = 100</param>
+        /// <param name="convert">Optionally calculate market quotes in up to 32 currencies at once by passing a comma-separated list of cryptocurrency or fiat currency symbols. Each additional convert option beyond the first requires an additional call credit. A list of supported fiat options can be found here. Each conversion is returned in its own "quote" object. Default = "USD"</param>
+        /// <returns></returns>
+        Task<CryptoCurrencyMain<MarketPairsLatestData>> GetMarketPairLatest(string id, string symbol, int start, int limit, string[] convert);
         
-        Task<OhlcvHistorical> GetOhlvcHistorical(string id, string symbol, string timePeriod,string timeStart,string timeEnd,int count,string interval,string[] convert);
+        /// <summary>
+        /// Return an interval of historic OHLCV (Open, High, Low, Close, Volume) market quotes for a cryptocurrency.
+        /// 
+        /// This endpoint is available on the following API plans : Standard (1 month),Professional (12 months),Enterprise (Up to 5 years) 
+        /// </summary>
+        /// <param name="id">One or more comma-separated CoinMarketCap cryptocurrency IDs. Example: "1,2"</param>
+        /// <param name="symbol">Alternatively pass one or more comma-separated cryptocurrency symbols. Example: "BTC,ETH". At least one "id" or "symbol" is required.</param>
+        /// <param name="timePeriod">Time period to return OHLCV data for. The default is "daily". Additional options will be available in the future. See the main endpoint description for details.Default = "daily"</param>
+        /// <param name="timeStart">Timestamp (Unix or ISO 8601) to start returning OHLCV time periods for. Only the date portion of the timestamp is used for daily OHLCV so it's recommended to send an ISO date format like "2018-09-19" without time.</param>
+        /// <param name="timeEnd">Timestamp (Unix or ISO 8601) to stop returning OHLCV time periods for (inclusive). Optional, if not passed we'll default to the current time. Only the date portion of the timestamp is used for daily OHLCV so it's recommended to send an ISO date format like "2018-09-19" without time.</param>
+        /// <param name="count">Optionally limit the number of time periods to return results for. The default is 10 items. The current query limit is 10000 items. Default = 10</param>
+        /// <param name="interval">Optionally adjust the interval that "time_period" is sampled. See main endpoint description for available options.</param>
+        /// <param name="convert">By default market quotes are returned in USD. Optionally calculate market quotes in another fiat currency or cryptocurrency. Currently historic endpoints are restricted to USD for fiat options.Default = "USD"</param>
+        /// <returns></returns>
+        Task<CryptoCurrencyMain<OhlcvHistoricalData>> GetOhlvcHistorical(string id, string symbol, string timePeriod,string timeStart,string timeEnd,int count,string interval,string[] convert);
 
-        Task<OhlcvLatest> GetOhlcvLatest(string id, string symbol, string[] convert);
+        /// <summary>
+        /// Return the latest OHLCV (Open, High, Low, Close, Volume) market values for one or more cryptocurrencies in the currently UTC day. Since the current UTC day is still active these values are updated frequently. You can find the final calculated OHLCV values for the last completed UTC day along with all historic days using /cryptocurrency/ohlcv/historical.
+        /// 
+        /// This endpoint is available on the following API plans:Standard,Professional,Enterprise 
+        /// </summary>
+        /// <param name="id">One or more comma-separated CoinMarketCap cryptocurrency IDs. Example: "1,2"</param>
+        /// <param name="symbol">Alternatively pass one or more comma-separated cryptocurrency symbols. Example: "BTC,ETH". At least one "id" or "symbol" is required.</param>
+        /// <param name="convert">By default market quotes are returned in USD. Optionally calculate market quotes in another fiat currency or cryptocurrency. Currently historic endpoints are restricted to USD for fiat options.Default = "USD"</param>
+        /// <returns></returns>
+        Task<CryptoCurrencyMain<Dictionary<string,OhlcvLatestData>>> GetOhlcvLatest(string id, string symbol, string[] convert);
         
-        Task<QuotesHistorical> GetQuotesHistorical(string id, string symbol,string timeStart,string timeEnd,int count,string interval, string[] convert);
+        /// <summary>
+        /// Returns an interval of historic market quotes for any cryptocurrency based on time and interval parameters.
+        /// 
+        /// This endpoint is available on the following API plans : Standard (1 month),Professional (12 months),Enterprise (Up to 5 years) 
+        /// </summary>
+        /// <param name="id">One or more comma-separated CoinMarketCap cryptocurrency IDs. Example: "1,2"</param>
+        /// <param name="symbol">Alternatively pass one or more comma-separated cryptocurrency symbols. Example: "BTC,ETH". At least one "id" or "symbol" is required.</param>
+        /// <param name="timeStart">Timestamp (Unix or ISO 8601) to start returning OHLCV time periods for. Only the date portion of the timestamp is used for daily OHLCV so it's recommended to send an ISO date format like "2018-09-19" without time.</param>
+        /// <param name="timeEnd">Timestamp (Unix or ISO 8601) to stop returning OHLCV time periods for (inclusive). Optional, if not passed we'll default to the current time. Only the date portion of the timestamp is used for daily OHLCV so it's recommended to send an ISO date format like "2018-09-19" without time.</param>
+        /// <param name="count">Optionally limit the number of time periods to return results for. The default is 10 items. The current query limit is 10000 items. Default = 10</param>
+        /// <param name="interval">Optionally adjust the interval that "time_period" is sampled. See main endpoint description for available options.</param>
+        /// <param name="convert">By default market quotes are returned in USD. Optionally calculate market quotes in another fiat currency or cryptocurrency. Currently historic endpoints are restricted to USD for fiat options.Default = "USD"</param>
+        /// <returns></returns>
+        Task<CryptoCurrencyMain<QuotesHistoricalData>> GetQuotesHistorical(string id, string symbol,string timeStart,string timeEnd,int count,string interval, string[] convert);
         
-        Task<QuotesLatest> GetQuotesLatest(string id, string symbol, string[] convert);
+        /// <summary>
+        /// Get the latest market quote for 1 or more cryptocurrencies. Use the "convert" option to return market values in multiple fiat and cryptocurrency conversions in the same call.
+        /// 
+        /// This endpoint is available on the following API plans:Starter,Hobbyist,Standard,Professional,Enterprise 
+        /// </summary>
+        /// <param name="id">One or more comma-separated CoinMarketCap cryptocurrency IDs. Example: "1,2"</param>
+        /// <param name="symbol">Alternatively pass one or more comma-separated cryptocurrency symbols. Example: "BTC,ETH". At least one "id" or "symbol" is required.</param>
+        /// <param name="convert">By default market quotes are returned in USD. Optionally calculate market quotes in another fiat currency or cryptocurrency. Currently historic endpoints are restricted to USD for fiat options.Default = "USD"</param>
+        /// <returns></returns>
+        Task<CryptoCurrencyMain<Dictionary<string,QuotesLatestData>>> GetQuotesLatest(string id, string symbol, string[] convert);
 
     }
 }
