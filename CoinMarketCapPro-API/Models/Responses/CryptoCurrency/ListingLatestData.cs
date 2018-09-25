@@ -3,20 +3,8 @@ using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 {
-    public class ListingLatestData
+    public class ListingLatestData:CryptoCurrencyDetail
     {
-        [JsonProperty("id")]
-        public long Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("symbol")]
-        public string Symbol { get; set; }
-
-        [JsonProperty("slug")]
-        public string Slug { get; set; }
-
         [JsonProperty("circulating_supply")]
         public double CirculatingSupply { get; set; }
 
