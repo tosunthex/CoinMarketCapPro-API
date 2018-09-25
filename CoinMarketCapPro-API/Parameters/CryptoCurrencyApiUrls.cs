@@ -94,12 +94,12 @@ namespace CoinMarketCapPro_API.Parameters
         public static Uri HistoricalQuotesUri(string id, string symbol, string timeStart, string timeEnd, int count,
             string interval, string[] convert)
         {
-            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/quotes/latest", new Dictionary<string, object>
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/quotes/historical", new Dictionary<string, object>
             {
                 {"id",id },
                 {"symbol",symbol },
-                {"timeStart",timeStart },
-                {"timeEnd",timeEnd },
+                {"time_start",timeStart },
+                {"time_end",timeEnd },
                 {"count",count },
                 {"interval",interval },
                 {"convert",string.Join(",",convert) }
@@ -107,7 +107,7 @@ namespace CoinMarketCapPro_API.Parameters
         }
         public static Uri LatestQuotesUri(string id, string symbol, string[] convert)
         {
-            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/quotes/historical", new Dictionary<string, object>
+            return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/quotes/latest", new Dictionary<string, object>
             {
                 {"id",id },
                 {"symbol",symbol },

@@ -57,5 +57,12 @@ namespace CoinMarketCapPro_API.Clients
         {
             return await GetAsync<OhlcvLatest>(CryptoCurrencyApiUrls.LatestOhlcvUri(id, symbol, convert));
         }
+
+        public async Task<QuotesHistorical> GetQuotesHistorical(string id, string symbol, string timeStart, string timeEnd, int count, string interval,
+            string[] convert)
+        {
+            return await GetAsync<QuotesHistorical>(
+                CryptoCurrencyApiUrls.HistoricalQuotesUri(id, symbol, timeStart, timeEnd, count, interval, convert));
+        }
     }
 }

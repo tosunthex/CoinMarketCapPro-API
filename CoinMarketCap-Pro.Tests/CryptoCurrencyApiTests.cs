@@ -71,5 +71,12 @@ namespace CoinMarketCap_Pro.Tests
             Assert.Equal("BTC",result.Data.First().Value.Symbol);
             Assert.Equal("Bitcoin",result.Data.First().Value.Name);
         }
+
+        [Fact]
+        public async Task QuotesHistoricalForBTC()
+        {
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesHistorical("", "BTC","2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z",10,Interval.Daily, new [] {"USD"});
+            Assert.Equal("Bitcoin",result.Data.Name);
+        }
     }
 }
