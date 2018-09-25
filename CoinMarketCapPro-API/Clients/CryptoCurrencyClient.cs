@@ -14,9 +14,9 @@ namespace CoinMarketCapPro_API.Clients
         public CryptoCurrencyClient(HttpClient httpClient)
         {
         }
-        public async Task<CryptoCurrencyMain<Dictionary<string,MetaDataData>>> GetMetaData(string[] id, string[] symbol)
+        public async Task<CryptoCurrencyMain<Dictionary<string,CryptoCurrencyInfoData>>> GetMetaData(string[] id, string[] symbol)
         {
-            return await GetAsync<CryptoCurrencyMain<Dictionary<string,MetaDataData>>>(CryptoCurrencyApiUrls.MetadataUri(id, symbol))
+            return await GetAsync<CryptoCurrencyMain<Dictionary<string,CryptoCurrencyInfoData>>>(CryptoCurrencyApiUrls.MetadataUri(id, symbol))
                 .ConfigureAwait(false);
         }
 

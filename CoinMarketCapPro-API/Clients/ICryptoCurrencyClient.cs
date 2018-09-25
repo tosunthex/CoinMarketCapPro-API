@@ -17,7 +17,7 @@ namespace CoinMarketCapPro_API.Clients
         /// <param name="id">One or more comma-separated CoinMarketCap cryptocurrency IDs. Example: "1,2"</param>
         /// <param name="symbol">Alternatively pass one or more comma-separated cryptocurrency symbols. Example: "BTC,ETH". At least one "id" or "symbol" is required.</param>
         /// <returns></returns>
-        Task<CryptoCurrencyMain<Dictionary<string,MetaDataData>>> GetMetaData(string[] id, string[] symbol);
+        Task<CryptoCurrencyMain<Dictionary<string,CryptoCurrencyInfoData>>> GetMetaData(string[] id, string[] symbol);
 
         /// <summary>
         /// Returns a paginated list of all cryptocurrencies by CoinMarketCap ID. We recommend using this convenience endpoint to lookup and utilize

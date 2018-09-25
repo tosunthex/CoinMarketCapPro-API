@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 {
-    public class MetaDataData:CryptoCurrencyDetail
+    public class CryptoCurrencyInfoData:CryptoCurrencyDetail
     {
         [JsonProperty("category")]
         public string Category { get; set; }
