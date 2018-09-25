@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
+namespace CoinMarketCapPro_API.Models.Responses
 {
-    public class Exchange
+    public class ExchangeDetail
     {
         [JsonProperty("id")]
         public long Id { get; set; }

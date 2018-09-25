@@ -5,7 +5,7 @@ namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
     public class MarketPairs
     {
         [JsonProperty("exchange")]
-        public Exchange Exchange { get; set; }
+        public ExchangeDetail Exchange { get; set; }
 
         [JsonProperty("market_pair")]
         public string MarketPair { get; set; }
