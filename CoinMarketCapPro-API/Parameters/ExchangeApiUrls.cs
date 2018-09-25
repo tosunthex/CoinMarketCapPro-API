@@ -78,7 +78,7 @@ namespace CoinMarketCapPro_API.Parameters
                 {"time_end", timeEnd},
                 {"count", count},
                 {"interval", interval},
-                {"convert", convert}
+                {"convert", string.Join(",",convert)}
             });
         }
 
@@ -88,7 +88,7 @@ namespace CoinMarketCapPro_API.Parameters
             {
                 {"id", id},
                 {"slug", slug},
-                {"convert", convert}
+                {"convert", string.Join(",",convert)}
             });
         }
     }

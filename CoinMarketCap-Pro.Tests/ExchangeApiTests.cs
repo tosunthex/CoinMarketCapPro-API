@@ -51,5 +51,12 @@ namespace CoinMarketCap_Pro.Tests
             Assert.Equal("Binance",result.Data.Name);
             Assert.Equal("BTC/USDT",result.Data.MarketPairs.First().MarketPair);
         }
+        
+        [Fact]
+        public async Task QuotesHistorical()
+        {
+            var result = await _coinMarketCapClient.ExchangeClient.GetQuotesHistorical("", "binance","2018-08-15T08:55:14.000Z","", 1, "", new[] {"USD"});
+            Assert.Equal("Binance",result.Data.Name);
+        }
     }
 }
