@@ -4,5 +4,6 @@
     {
         ICryptoCurrencyClient CryptoCurrencyClient { get; }
         IExchangeClient ExchangeClient { get; }
+        IToolsClient ToolsClient { get; }
     }
 }

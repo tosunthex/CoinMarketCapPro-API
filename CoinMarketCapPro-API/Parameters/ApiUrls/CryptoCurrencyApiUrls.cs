@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using CoinMarketCapPro_API.Services;
 
-namespace CoinMarketCapPro_API.Parameters
+namespace CoinMarketCapPro
 {
     public class CryptoCurrencyApiUrls
     {

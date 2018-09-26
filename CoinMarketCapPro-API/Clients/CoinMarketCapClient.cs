@@ -21,6 +21,7 @@ namespace CoinMarketCapPro_API.Clients
         }
         public ICryptoCurrencyClient CryptoCurrencyClient => new CryptoCurrencyClient(_httpClient);
         public IExchangeClient ExchangeClient => new ExchangeClient(_httpClient);
+        public IToolsClient ToolsClient => new ToolsClient(_httpClient);
 
         public void Dispose()
         {

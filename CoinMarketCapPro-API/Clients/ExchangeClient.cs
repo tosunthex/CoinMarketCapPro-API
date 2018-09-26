@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CoinMarketCapPro;
 using CoinMarketCapPro_API.Models.Responses;
 using CoinMarketCapPro_API.Models.Responses.Exchange;
 using CoinMarketCapPro_API.Parameters;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
+using CoinMarketCapPro;
 using CoinMarketCapPro_API.Models.Responses;
 using CoinMarketCapPro_API.Models.Responses.CryptoCurrency;
 using CoinMarketCapPro_API.Parameters;
