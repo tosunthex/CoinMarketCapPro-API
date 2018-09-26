@@ -12,10 +12,14 @@ namespace CoinMarketCapPro_API.Clients
         {
             
         }
-        public async Task<ResponseMain<GlobalMetricsData>> GetGlobalMetricsHistorical(string timeStart, string timeEnd, int count, string interval, string[] convert)
+        public async Task<ResponseMain<GlobalMetricsHistoricalData>> GetGlobalMetricsHistorical(string timeStart, string timeEnd, int count, string interval, string[] convert)
         {
-            return await GetAsync<ResponseMain<GlobalMetricsData>>(GlobalMetricsApiUrls.QuotesHistoricalUri(
+            return await GetAsync<ResponseMain<GlobalMetricsHistoricalData>>(GlobalMetricsApiUrls.QuotesHistoricalUri(
                 timeStart, timeEnd, count, interval, convert));
+        }
+        public async Task<ResponseMain<GlobalMetricsLatestData>> GetGlobalMetricsLatest(string[] convert)
+        {
+            return await GetAsync<ResponseMain<GlobalMetricsLatestData>>(GlobalMetricsApiUrls.QuotesLatestUri(convert));
         }
     }
 }

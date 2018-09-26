@@ -23,5 +23,12 @@ namespace CoinMarketCap_Pro.Tests
                     new[] {"USD"});
             Assert.Equal("USD",result.Data.Quotes.First().Quote.Keys.First());
         }
+        [Fact]
+        public async Task GlobalMetricsLatest()
+        {
+            var result =
+                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsLatest(new[] { "USD" });
+            Assert.Equal("USD", result.Data.Quote.First().Key);
+        }
     }
 }

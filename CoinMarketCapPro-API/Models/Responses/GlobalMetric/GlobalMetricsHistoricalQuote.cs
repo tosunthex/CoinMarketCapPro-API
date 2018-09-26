@@ -1,9 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace CoinMarketCapPro_API.Models.Responses
+namespace CoinMarketCapPro
 {
-    public class GlobalMetricsQuote
+    public class GlobalMetricsHistoricalQuote
     {
         [JsonProperty("total_market_cap")]
         public double TotalMarketCap { get; set; }

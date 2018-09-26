@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace CoinMarketCapPro_API.Models.Responses
+namespace CoinMarketCapPro
 {
-    public class GlobalMetricsQuotes
+    public class GlobalMetricsHistoricalQuotes
     {
         [JsonProperty("timestamp")]
         public DateTimeOffset Timestamp { get; set; }
@@ -13,6 +13,6 @@ namespace CoinMarketCapPro_API.Models.Responses
         public double BtcDominance { get; set; }
 
         [JsonProperty("quote")]
-        public Dictionary<string, GlobalMetricsQuote> Quote { get; set; }
+        public Dictionary<string, GlobalMetricsHistoricalQuote> Quote { get; set; }
     }
 }
