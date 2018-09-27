@@ -6,6 +6,5 @@ namespace CoinMarketCapPro_API.Parameters
     {
         public static Uri ApiEndPoint { get; set; }
         public static string ApiKey { get; set; }
-
     }
 }

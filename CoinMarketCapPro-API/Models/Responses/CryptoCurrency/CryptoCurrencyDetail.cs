@@ -2,9 +2,8 @@
 
 namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 {
-    public class CryptoCurrencyDetail:CryptoCurrencyBase
+    public class CryptoCurrencyDetail : CryptoCurrencyBase
     {
-        [JsonProperty("symbol")]
-        public string Symbol { get; set; }
+        [JsonProperty("symbol")] public string Symbol { get; set; }
     }
 }

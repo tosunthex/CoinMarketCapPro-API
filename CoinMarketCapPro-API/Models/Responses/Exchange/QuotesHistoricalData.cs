@@ -2,9 +2,8 @@
 
 namespace CoinMarketCapPro_API.Models.Responses.Exchange
 {
-    public class QuotesHistoricalData:CryptoCurrencyBase
+    public class QuotesHistoricalData : CryptoCurrencyBase
     {
-        [JsonProperty("quotes")]
-        public QuotesHistoricalQuotes[] Quotes { get; set; }
+        [JsonProperty("quotes")] public QuotesHistoricalQuotes[] Quotes { get; set; }
     }
 }

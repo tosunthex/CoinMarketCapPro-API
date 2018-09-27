@@ -15,6 +15,5 @@
         public static readonly string PercentChange1H = "percent_change_1h";
         public static readonly string PercentChange24H = "percent_change_24h";
         public static readonly string PercentChange7D = "percent_change_7d";
-        
     }
 }

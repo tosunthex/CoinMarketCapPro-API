@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CoinMarketCapPro_API.Parameters
+﻿namespace CoinMarketCapPro_API.Parameters
 {
     public static class ListingStatus
     {

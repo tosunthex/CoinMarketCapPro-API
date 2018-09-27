@@ -16,6 +16,5 @@
         public static readonly string D60 = "60d";
         public static readonly string D90 = "90d";
         public static readonly string D365 = "365d";
-        
     }
 }

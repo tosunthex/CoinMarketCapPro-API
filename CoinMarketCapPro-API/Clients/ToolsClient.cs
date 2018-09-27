@@ -6,13 +6,14 @@ using CoinMarketCapPro_API.Models.Responses.Tools;
 
 namespace CoinMarketCapPro_API.Clients
 {
-    public class ToolsClient:BaseApiClient,IToolsClient
+    public class ToolsClient : BaseApiClient, IToolsClient
     {
         public ToolsClient(HttpClient httpClient)
         {
-            
         }
-        public async Task<ResponseMain<PriceConversionData>> GetPriceConversion(float amount, string id, string symbol, string time, string[] convert)
+
+        public async Task<ResponseMain<PriceConversionData>> GetPriceConversion(float amount, string id, string symbol,
+            string time, string[] convert)
         {
             return await GetAsync<ResponseMain<PriceConversionData>>(ToolsApiUrls.InfoUri(amount, id, symbol, time,
                 convert));

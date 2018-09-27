@@ -4,15 +4,12 @@ using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.Exchange
 {
-    public class ListingsLatestData:CryptoCurrencyBase
+    public class ListingsLatestData : CryptoCurrencyBase
     {
-        [JsonProperty("num_market_pairs")]
-        public long NumMarketPairs { get; set; }
+        [JsonProperty("num_market_pairs")] public long NumMarketPairs { get; set; }
 
-        [JsonProperty("last_updated")]
-        public DateTimeOffset LastUpdated { get; set; }
+        [JsonProperty("last_updated")] public DateTimeOffset LastUpdated { get; set; }
 
-        [JsonProperty("quote")]
-        public Dictionary<string, ListingsLatestQuote> Quote { get; set; }
+        [JsonProperty("quote")] public Dictionary<string, ListingsLatestQuote> Quote { get; set; }
     }
 }
