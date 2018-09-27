@@ -20,9 +20,9 @@ namespace CoinMarketCapPro_API.Clients
                 .ConfigureAwait(false);
         }
 
-        public async Task<ResponseMain<MapData[]>> GetMap(string listingStart, string slug, int start, int limit)
+        public async Task<ResponseMain<MapData[]>> GetMap(string listingStatus, string slug, int start, int limit)
         {
-            return await GetAsync<ResponseMain<MapData[]>>(ExchangeApiUrls.MapUri(listingStart, slug, start, limit));
+            return await GetAsync<ResponseMain<MapData[]>>(ExchangeApiUrls.MapUri(listingStatus, slug, start, limit));
         }
 
         public async Task<ResponseMain<ListingsHistoricalData[]>> GetListingHistorical(string timeStamp, int start, int limit, string sortField, string sortDir, string marketType,
