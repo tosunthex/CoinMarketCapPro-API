@@ -47,7 +47,7 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task MarketPairsLatest()
         {
-            var result = await _coinMarketCapClient.ExchangeClient.GetMarketPairsLatest("", "binance", 1, 100, new[] {"USD"});
+            var result = await _coinMarketCapClient.ExchangeClient.GetMarketPairsLatest("", "binance", 1, 100, new[] { Currency.Usd });
             Assert.Equal("Binance",result.Data.Name);
             Assert.Equal("BTC/USDT",result.Data.MarketPairs.First().MarketPair);
         }
@@ -55,14 +55,14 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task QuotesHistorical()
         {
-            var result = await _coinMarketCapClient.ExchangeClient.GetQuotesHistorical("", "binance","2018-08-15T08:55:14.000Z","", 1, "", new[] {"USD"});
+            var result = await _coinMarketCapClient.ExchangeClient.GetQuotesHistorical("", "binance","2018-08-15T08:55:14.000Z","", 1, "", new[] { Currency.Usd });
             Assert.Equal("Binance",result.Data.Name);
         }
         
         [Fact]
         public async Task QuotesLatest()
         {
-            var result = await _coinMarketCapClient.ExchangeClient.GetQuotesLatest("", "binance",new[] {"USD"});
+            var result = await _coinMarketCapClient.ExchangeClient.GetQuotesLatest("", "binance",new[] { Currency.Usd });
             Assert.Equal("Binance",result.Data.First().Value.Name);
         }
     }

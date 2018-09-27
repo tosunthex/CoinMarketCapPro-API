@@ -17,7 +17,7 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task BitcoinToUsdPriceConversion()
         {
-            var result = await _coinMarketCapClient.ToolsClient.GetPriceConversion(1, "", "BTC", "", new[] {"USD"});
+            var result = await _coinMarketCapClient.ToolsClient.GetPriceConversion(1, "", Currency.Btc, "", new[] { Currency.Usd });
             Assert.Equal("BTC",result.Data.Symbol);
         }
     }

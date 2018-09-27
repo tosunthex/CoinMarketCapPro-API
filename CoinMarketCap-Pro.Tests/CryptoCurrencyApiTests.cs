@@ -18,7 +18,7 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task MetaDataMustReturnGivenCurrencyDetail()
         {
-            var  currencyInfo = await _coinMarketCapClient.CryptoCurrencyClient.GetMetaData(new string[]{}, new []{"BTC","XRP"});
+            var  currencyInfo = await _coinMarketCapClient.CryptoCurrencyClient.GetMetaData(new string[]{}, new []{Currency.Btc,Currency.Xrp});
             Assert.Equal("BTC",currencyInfo.Data.Values.First().Symbol);
             Assert.Equal("XRP", currencyInfo.Data.Values.Last().Symbol);
         }
@@ -50,7 +50,7 @@ namespace CoinMarketCap_Pro.Tests
         public async Task MarketPairsLastestForBtc()
         {
             var marketPairs =
-                await _coinMarketCapClient.CryptoCurrencyClient.GetMarketPairLatest("", "BTC", 1, 1, new[] {""});
+                await _coinMarketCapClient.CryptoCurrencyClient.GetMarketPairLatest("", Currency.Btc, 1, 1, new[] {""});
             Assert.Equal("BTC/USD",marketPairs.Data.MarketPairs.First().MarketPair);
             Assert.Equal("BitMEX",marketPairs.Data.MarketPairs.First().Exchange.Name);
         }
@@ -59,7 +59,7 @@ namespace CoinMarketCap_Pro.Tests
         public async Task OhlcvHistoricalForBtc()
         {
             var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlvcHistorical("", "BTC", Interval.Daily,
-                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z", 10, Interval.Daily, new string[] {"USD"});
+                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z", 10, Interval.Daily, new string[] {Currency.Usd});
             Assert.Equal(3, result.Data.Quotes.Length);
             Assert.Equal("BTC", result.Data.Symbol);
         }
@@ -67,7 +67,7 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task OhlcvLatestForBtc()
         {
-            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlcvLatest("", "BTC", new [] {"USD"});
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlcvLatest("", Currency.Btc, new [] { Currency.Usd });
             Assert.Equal("BTC",result.Data.First().Value.Symbol);
             Assert.Equal("Bitcoin",result.Data.First().Value.Name);
         }
@@ -75,14 +75,14 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task QuotesHistoricalForBtc()
         {
-            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesHistorical("", "BTC","2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z",10,Interval.Daily, new [] {"USD"});
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesHistorical("", "BTC","2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z",10,Interval.Daily, new [] { Currency.Usd });
             Assert.Equal("Bitcoin",result.Data.Name);
         }
 
         [Fact]
         public async Task QuotesLatestForBtc()
         {
-            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesLatest("", "BTC", new [] {"USD"});
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesLatest("", "BTC", new [] { Currency.Usd });
             Assert.Equal("Bitcoin",result.Data.First().Value.Name);
         }
     }
