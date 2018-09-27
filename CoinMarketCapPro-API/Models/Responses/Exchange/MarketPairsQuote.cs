@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CoinMarketCapPro;
 using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.Exchange

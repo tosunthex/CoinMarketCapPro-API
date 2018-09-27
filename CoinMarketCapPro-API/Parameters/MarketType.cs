@@ -2,8 +2,8 @@
 {
     public static class MarketType
     {
-        public static string Fees = "fees";
-        public static string NoFees = "no_fees";
-        public static string All = "All";
+        public static readonly string Fees = "fees";
+        public static readonly string NoFees = "no_fees";
+        public static readonly string All = "All";
     }
 }

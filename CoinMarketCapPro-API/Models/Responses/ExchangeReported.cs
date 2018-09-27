@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
+namespace CoinMarketCapPro
 {
     public class ExchangeReported
     {

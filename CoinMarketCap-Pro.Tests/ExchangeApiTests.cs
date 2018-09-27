@@ -39,7 +39,7 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task ListingLatestBinance()
         {
-            var result = await _coinMarketCapClient.ExchangeClient.GetListingLatest(1, 100, "", "", "", new []{""});
+            var result = await _coinMarketCapClient.ExchangeClient.GetListingLatest(1, 100,SortField.Volume24H, SortDirection.Desc, MarketType.Fees, new []{""});
             Assert.Equal("Binance",result.Data.First().Name);
             Assert.Equal("binance",result.Data.First().Slug);
         }
