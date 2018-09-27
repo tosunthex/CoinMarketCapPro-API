@@ -31,8 +31,8 @@ namespace CoinMarketCapPro_API.Clients
 
         protected virtual void Dispose(bool disposing)
         {
-            if (_isDisposed) return;
-            if (disposing) _httpClient?.Dispose();
+            if (_isDisposed) {return;}
+            if (disposing) {_httpClient?.Dispose();}
             _isDisposed = true;
         }
     }

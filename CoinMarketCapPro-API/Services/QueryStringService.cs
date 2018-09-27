@@ -6,13 +6,15 @@ using CoinMarketCapPro_API.Parameters;
 
 namespace CoinMarketCapPro_API.Services
 {
-    public class QueryStringService
+    public static class QueryStringService
     {
         public static Uri CreateUrl(string path, Dictionary<string, object> parameter)
         {
             var urlParameters = new List<string>();
             foreach (var par in parameter)
+            { 
                 urlParameters.Add(string.IsNullOrWhiteSpace(par.Value.ToString()) ? null : $"{par.Key}={par.Value}");
+            }
 
             var encodedParams = urlParameters
                 .Where(x => !string.IsNullOrWhiteSpace(x))
