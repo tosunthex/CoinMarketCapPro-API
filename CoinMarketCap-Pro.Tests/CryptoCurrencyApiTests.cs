@@ -13,7 +13,6 @@ namespace CoinMarketCap_Pro.Tests
         public CryptoCurrencyApiTests()
         {
             _coinMarketCapClient = new CoinMarketCapClient(new HttpClientHandler(), ApiEnvironment.Sandbox, "5bb4185b-ebb3-4cf7-942a-66a280f5db8b");
-            //_coinMarketCapClient = new CoinMarketCapClient(new HttpClientHandler(), ApiEnvironment.Pro, "c572865c-d03a-4be2-8cba-84c963e48869");
         }
         [Fact]
         public async Task MetaDataMustReturnGivenCurrencyDetail()
@@ -54,7 +53,7 @@ namespace CoinMarketCap_Pro.Tests
                 await _coinMarketCapClient.CryptoCurrencyClient.GetMarketPairLatest("", Currency.Btc, 1, 1, new []{ Currency.Usd,Currency.Eur });
             Assert.Equal("BTC/USD",marketPairs.Data.MarketPairs.First().MarketPair);
             Assert.Equal("BitMEX",marketPairs.Data.MarketPairs.First().Exchange.Name);
-            //Assert.Equal("USD", marketPairs.Data.MarketPairs.First().Quote.QuoteConvert.First().Key);
+            Assert.Equal("USD", marketPairs.Data.MarketPairs.First().Quote.Last().Key);
         }
 
         [Fact]

@@ -7,7 +7,7 @@
     <Authors>Levent Saatci</Authors>
     <Description>C# client connects to CoinMarketCap Pro API </Description>
     <Copyright>Copyright 2018 (c). All rights reserved.</Copyright>
-    <PackageTags>coinmarketcap pro public sandbox coin market cap crypto client C# .net .netstandart standart</PackageTags>
+    <PackageTags>coinmarketcappro coinmarketcap pro public sandbox coin market cap crypto client C# .net .netstandart standart</PackageTags>
     <PackageLicenseUrl>http://choosealicense.com/licenses/bsd-2-clause/</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/tosunthex/CoinMarketCapPro-API</PackageProjectUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
