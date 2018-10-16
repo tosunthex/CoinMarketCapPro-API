@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
@@ -9,7 +10,7 @@ namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 
         [JsonProperty("total_supply")] public double TotalSupply { get; set; }
 
-        [JsonProperty("quote")] public Quote Quote { get; set; }
+        [JsonProperty("quote")] public Dictionary<string,Quote> Quote { get; set; }
     }
     public class LastestDataDetail: CryptoCurrencyDetail
     { 

@@ -44,15 +44,17 @@ namespace CoinMarketCap_Pro.Tests
             var listingHistorical = await _coinMarketCapClient.CryptoCurrencyClient.GetListingLatest(1, 2,
                 new[] {"USD"}, SortField.MarketCap, SortDirection.Desc, CryptoCurrencyType.All);
             Assert.Equal("BTC",listingHistorical.Data.First().Symbol);
+            Assert.Equal("USD",listingHistorical.Data.First().Quote.First().Key);
         }
 
         [Fact]
         public async Task MarketPairsLastestForBtc()
         {
             var marketPairs =
-                await _coinMarketCapClient.CryptoCurrencyClient.GetMarketPairLatest("", Currency.Btc, 1, 1, new[] {""});
+                await _coinMarketCapClient.CryptoCurrencyClient.GetMarketPairLatest("", Currency.Btc, 1, 1, new []{ Currency.Usd,Currency.Eur });
             Assert.Equal("BTC/USD",marketPairs.Data.MarketPairs.First().MarketPair);
             Assert.Equal("BitMEX",marketPairs.Data.MarketPairs.First().Exchange.Name);
+            //Assert.Equal("USD", marketPairs.Data.MarketPairs.First().Quote.QuoteConvert.First().Key);
         }
 
         [Fact]
@@ -84,6 +86,7 @@ namespace CoinMarketCap_Pro.Tests
         {
             var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesLatest("", "BTC", new [] { Currency.Usd });
             Assert.Equal("Bitcoin",result.Data.First().Value.Name);
+            Assert.Equal("USD",result.Data.First().Value.Quote.First().Key);
         }
     }
 }

@@ -12,6 +12,6 @@ namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 
         [JsonProperty("market_pair_quote")] public MarketPairBaseClass MarketPairQuote { get; set; }
 
-        [JsonProperty("quote")] public Quote Quote { get; set; }
+        [JsonProperty("quote")] public MarketPairsLatestQuote Quote { get; set; }
     }
 }

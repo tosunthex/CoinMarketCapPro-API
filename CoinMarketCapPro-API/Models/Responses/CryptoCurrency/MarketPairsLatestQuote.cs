@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CoinMarketCapPro;
+using CoinMarketCapPro_API.Parameters;
 using Newtonsoft.Json;
 
 namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
