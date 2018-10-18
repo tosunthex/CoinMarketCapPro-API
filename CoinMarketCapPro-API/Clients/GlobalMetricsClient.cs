@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using CoinMarketCapPro;
 using CoinMarketCapPro_API.Models.Responses;
+using CoinMarketCapPro_API.Parameters;
 
 namespace CoinMarketCapPro_API.Clients
 {
@@ -18,8 +19,22 @@ namespace CoinMarketCapPro_API.Clients
                 timeStart, timeEnd, count, interval, convert));
         }
 
+        public async Task<ResponseMain<GlobalMetricsHistoricalData>> GetGlobalMetricsHistorical(string timeStart, string timeEnd)
+        {
+            var convert = new[] { Currency.Usd };
+            const int count = 10;
+            return await GetAsync<ResponseMain<GlobalMetricsHistoricalData>>(GlobalMetricsApiUrls.QuotesHistoricalUri(
+                timeStart, timeEnd, count, Interval.D1, convert));
+        }
+
         public async Task<ResponseMain<GlobalMetricsLatestData>> GetGlobalMetricsLatest(string[] convert)
         {
+            return await GetAsync<ResponseMain<GlobalMetricsLatestData>>(GlobalMetricsApiUrls.QuotesLatestUri(convert));
+        }
+
+        public async Task<ResponseMain<GlobalMetricsLatestData>> GetGlobalMetricsLatest()
+        {
+            var convert = new[] { Currency.Usd };
             return await GetAsync<ResponseMain<GlobalMetricsLatestData>>(GlobalMetricsApiUrls.QuotesLatestUri(convert));
         }
     }

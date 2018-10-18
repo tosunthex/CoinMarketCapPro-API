@@ -90,13 +90,13 @@ namespace CoinMarketCapPro
                 });
         }
 
-        public static Uri LatestOhlcvUri(string id, string symbol, string[] convert)
+        public static Uri LatestOhlcvUri(string[] id, string[] symbol, string[] convert)
         {
             return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/ohlcv/latest"
                 , new Dictionary<string, object>
                 {
-                    {"id", id},
-                    {"symbol", symbol},
+                    {"id", string.Join(",",id)},
+                    {"symbol", string.Join(",",symbol)},
                     {"convert", string.Join(",", convert)}
                 });
         }
@@ -117,12 +117,12 @@ namespace CoinMarketCapPro
                 });
         }
 
-        public static Uri LatestQuotesUri(string id, string symbol, string[] convert)
+        public static Uri LatestQuotesUri(string[] id, string[] symbol, string[] convert)
         {
             return QueryStringService.CreateUrl($"{CryptoCurrencyPath}/quotes/latest", new Dictionary<string, object>
             {
-                {"id", id},
-                {"symbol", symbol},
+                {"id", string.Join(",",id)},
+                {"symbol", string.Join(",",symbol)},
                 {"convert", string.Join(",", convert)}
             });
         }

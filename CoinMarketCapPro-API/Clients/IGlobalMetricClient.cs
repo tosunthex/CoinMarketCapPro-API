@@ -38,6 +38,23 @@ namespace CoinMarketCapPro_API.Clients
             int count, string interval, string[] convert);
 
         /// <summary>
+        ///     Get an interval of aggregate 24 hour volume and market cap data globally based on time and interval parameters.
+        ///     This endpoint is available on the following API plans:Standard,Professional,Enterprise
+        ///     Default Values: count =10, interval=1d, convert="USD"
+        /// </summary>
+        /// <param name="timeStart">
+        ///     Timestamp (Unix or ISO 8601) to start returning quotes for. Optional, if not passed, we'll
+        ///     return quotes calculated in reverse from "time_end
+        /// </param>
+        /// <param name="timeEnd">
+        ///     Timestamp (Unix or ISO 8601) to stop returning quotes for (inclusive). Optional, if not passed,
+        ///     we'll default to the current time. If no "time_start" is passed, we return quotes in reverse order starting from
+        ///     this time
+        /// </param>
+        /// <returns></returns>
+        Task<ResponseMain<GlobalMetricsHistoricalData>> GetGlobalMetricsHistorical(string timeStart, string timeEnd);
+
+        /// <summary>
         ///     Get the latest quote of aggregate market metrics. Use the "convert" option to return market values in multiple fiat
         ///     and cryptocurrency conversions in the same call.
         ///     This endpoint is available on the following API plans:Starter,Hobbyist,Standard,Professional,Enterprise
@@ -49,5 +66,13 @@ namespace CoinMarketCapPro_API.Clients
         /// </param>
         /// <returns></returns>
         Task<ResponseMain<GlobalMetricsLatestData>> GetGlobalMetricsLatest(string[] convert);
+
+        /// <summary>
+        ///     Get the latest quote of aggregate market metrics. Use the "convert" option to return market values in multiple fiat
+        ///     and cryptocurrency conversions in the same call.
+        ///     This endpoint is available on the following API plans:Starter,Hobbyist,Standard,Professional,Enterprise
+        /// </summary>
+        /// <returns></returns>
+        Task<ResponseMain<GlobalMetricsLatestData>> GetGlobalMetricsLatest();
     }
 }

@@ -96,6 +96,16 @@ namespace CoinMarketCapPro_API.Clients
             string sortDir, string marketType, string[] convert);
 
         /// <summary>
+        ///     Get a paginated list of all cryptocurrency exchanges with 24 hour volume. Additional market data fields will be
+        ///     available in the future. You can configure this call to sort by 24 hour volume or another field. Use the "convert"
+        ///     option to return market values in multiple fiat and cryptocurrency conversions in the same call.
+        ///     This endpoint is available on the following API plans:Standard,Professional,Enterprise
+        ///     Default Values: start=1, limit=100, sortField="volume_24h",sort_dir="desc" market_type="fees", convert="USD"
+        /// </summary>
+        /// <returns></returns>
+        Task<ResponseMain<ListingsLatestData[]>> GetListingLatest();
+
+        /// <summary>
         ///     Get a list of active market pairs for an exchange. Active means the market pair is open for trading. Use the
         ///     "convert" option to return market values in multiple fiat and cryptocurrency conversions in the same call.
         ///     This endpoint is available on the following API plans:Standard,Professional,Enterprise
@@ -118,6 +128,18 @@ namespace CoinMarketCapPro_API.Clients
         /// <returns></returns>
         Task<ResponseMain<MarketPairsLatestData>> GetMarketPairsLatest(string id, string slug, int start, int limit,
             string[] convert);
+
+        /// <summary>
+        ///     Get a list of active market pairs for an exchange. Active means the market pair is open for trading. Use the
+        ///     "convert" option to return market values in multiple fiat and cryptocurrency conversions in the same call.
+        ///     This endpoint is available on the following API plans:Standard,Professional,Enterprise
+        /// </summary>
+        /// <param name="idOrSlug">
+        ///     A CoinMarketCap exchange ID or Exchange "slug" (URL friendly all lowercase
+        ///     shorthand version of name with spaces replaced with hyphens). Example: "1", "binance".
+        /// </param>
+        /// <returns></returns>
+        Task<ResponseMain<MarketPairsLatestData>> GetMarketPairsLatest(string idOrSlug);
 
         /// <summary>
         ///     Returns an interval of historic quotes for any exchange based on time and interval parameters.
@@ -157,6 +179,27 @@ namespace CoinMarketCapPro_API.Clients
             string timeEnd, int count, string interval, string[] convert);
 
         /// <summary>
+        ///     Returns an interval of historic quotes for any exchange based on time and interval parameters.
+        ///     This endpoint is available on the following API plans:Standard,Professional,Enterprise
+        /// </summary>
+        /// <param name="idOrSlug">
+        ///     A CoinMarketCap exchange ID or Exchange "slug" (URL friendly all lowercase
+        ///     shorthand version of name with spaces replaced with hyphens). Example: "1", "binance".
+        /// </param>
+        /// <param name="timeStart">
+        ///     Timestamp (Unix or ISO 8601) to start returning quotes for. Optional, if not passed, we'll
+        ///     return quotes calculated in reverse from "time_end
+        /// </param>
+        /// <param name="timeEnd">
+        ///     Timestamp (Unix or ISO 8601) to stop returning quotes for (inclusive). Optional, if not passed,
+        ///     we'll default to the current time. If no "time_start" is passed, we return quotes in reverse order starting from
+        ///     this time
+        /// </param>
+
+        /// <returns></returns>
+        Task<ResponseMain<QuotesHistoricalData>> GetQuotesHistorical(string idOrSlug, string timeStart,string timeEnd);
+
+        /// <summary>
         ///     Get the latest 24 hour volume quote for 1 or more exchanges. Additional market data fields will be available in the
         ///     future. Use the "convert" option to return market values in multiple fiat and cryptocurrency conversions in the
         ///     same call.
@@ -176,5 +219,18 @@ namespace CoinMarketCapPro_API.Clients
         /// <returns></returns>
         Task<ResponseMain<Dictionary<string, QuotesLatestData>>> GetQuotesLatest(string id, string slug,
             string[] convert);
+
+        /// <summary>
+        ///     Get the latest 24 hour volume quote for 1 or more exchanges. Additional market data fields will be available in the
+        ///     future. Use the "convert" option to return market values in multiple fiat and cryptocurrency conversions in the
+        ///     same call.
+        ///     This endpoint is available on the following API plans:Standard,Professional,Enterprise
+        /// </summary>
+        /// <param name="idOrSlug">
+        ///     A CoinMarketCap exchange ID or Exchange "slug" (URL friendly all lowercase
+        ///     shorthand version of name with spaces replaced with hyphens). Example: "1", "binance".
+        /// </param>
+        /// <returns></returns>
+        Task<ResponseMain<Dictionary<string, QuotesLatestData>>> GetQuotesLatest(string idOrSlug);
     }
 }

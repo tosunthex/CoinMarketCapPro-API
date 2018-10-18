@@ -38,10 +38,10 @@ namespace CoinMarketCap_Pro.Tests
 //            Assert.Equal("BTC",listingHistorical.Data.First().Symbol);
 //        }
         [Fact]
-        public async Task BtcToUsdListingsHistorical()
+        public async Task BtcToUsdListingsLatest()
         {
             var listingHistorical = await _coinMarketCapClient.CryptoCurrencyClient.GetListingLatest(1, 2,
-                new[] {"USD"}, SortField.MarketCap, SortDirection.Desc, CryptoCurrencyType.All);
+                new[] {"USD"}, SortField.MarketCap, "", CryptoCurrencyType.All);
             Assert.Equal("BTC",listingHistorical.Data.First().Symbol);
             Assert.Equal("USD",listingHistorical.Data.First().Quote.First().Key);
         }
@@ -68,7 +68,7 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task OhlcvLatestForBtc()
         {
-            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlcvLatest("", Currency.Btc, new [] { Currency.Usd });
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlcvLatest(new []{""}, new []{ Currency.Btc }, new [] { Currency.Usd });
             Assert.Equal("BTC",result.Data.First().Value.Symbol);
             Assert.Equal("Bitcoin",result.Data.First().Value.Name);
         }
@@ -83,7 +83,7 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task QuotesLatestForBtc()
         {
-            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesLatest("", "BTC", new [] { Currency.Usd });
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesLatest(new[] { "" }, new[] { Currency.Btc }, new [] { Currency.Usd });
             Assert.Equal("Bitcoin",result.Data.First().Value.Name);
             Assert.Equal("USD",result.Data.First().Value.Quote.First().Key);
         }
