@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CoinMarketCapPro;
@@ -20,7 +21,7 @@ namespace CoinMarketCapPro_API.Clients
                 .ConfigureAwait(false);
         }
 
-        public async Task<ResponseMain<MapData[]>> GetMap(string listingStatus, string slug, int start, int limit)
+        public async Task<ResponseMain<MapData[]>> GetMap(string listingStatus, string slug, int? start, int? limit)
         {
             return await GetAsync<ResponseMain<MapData[]>>(ExchangeApiUrls.MapUri(listingStatus, slug, start, limit))
                 .ConfigureAwait(false);
@@ -36,7 +37,7 @@ namespace CoinMarketCapPro_API.Clients
                 .ConfigureAwait(false);
         }
 
-        public async Task<ResponseMain<ListingsLatestData[]>> GetListingLatest(int start, int limit, string sortField,
+        public async Task<ResponseMain<ListingsLatestData[]>> GetListingLatest(int? start, int? limit, string sortField,
             string sortDir, string marketType, string[] convert)
         {
             return await GetAsync<ResponseMain<ListingsLatestData[]>>(
@@ -46,13 +47,13 @@ namespace CoinMarketCapPro_API.Clients
         public async Task<ResponseMain<ListingsLatestData[]>> GetListingLatest()
         {
             return await GetAsync<ResponseMain<ListingsLatestData[]>>(
-                    ExchangeApiUrls.ListingsLatest(1, 100, SortField.Volume24H, SortDirection.Desc, MarketType.Fees,
-                        new[] {Currency.Usd}))
+                    ExchangeApiUrls.ListingsLatest(null, null, SortField.Volume24H, SortDirection.Desc, MarketType.Fees,
+                        new[] { string.Empty }))
                 .ConfigureAwait(false);
         }
 
-        public async Task<ResponseMain<MarketPairsLatestData>> GetMarketPairsLatest(string id, string slug, int start,
-            int limit, string[] convert)
+        public async Task<ResponseMain<MarketPairsLatestData>> GetMarketPairsLatest(string id, string slug, int? start,
+            int? limit, string[] convert)
         {
             return await GetAsync<ResponseMain<MarketPairsLatestData>>(
                 ExchangeApiUrls.MarketPairsLatest(id, slug, start, limit, convert)).ConfigureAwait(false);
@@ -60,17 +61,13 @@ namespace CoinMarketCapPro_API.Clients
         }
 
         public async Task<ResponseMain<MarketPairsLatestData>> GetMarketPairsLatest(string idOrSlug)
-        {   
-            const int limit = 100;
-            const int start = 1;
-            var convert = new[] { Currency.Usd };
-
+        {
             return int.TryParse(idOrSlug, out var id)
                 ? await GetAsync<ResponseMain<MarketPairsLatestData>>(
-                        ExchangeApiUrls.MarketPairsLatest(id.ToString(), string.Empty, start, limit, convert))
+                        ExchangeApiUrls.MarketPairsLatest(id.ToString(), string.Empty, null, null, new[] { string.Empty }))
                     .ConfigureAwait(false)
                 : await GetAsync<ResponseMain<MarketPairsLatestData>>(
-                        ExchangeApiUrls.MarketPairsLatest(string.Empty, idOrSlug, start, limit, convert))
+                        ExchangeApiUrls.MarketPairsLatest(string.Empty, idOrSlug, null, null, new[] { string.Empty }))
                     .ConfigureAwait(false);
         }
 
@@ -85,17 +82,14 @@ namespace CoinMarketCapPro_API.Clients
 
         public async Task<ResponseMain<QuotesHistoricalData>> GetQuotesHistorical(string idOrSlug, string timeStart, string timeEnd)
         {
-            const int count = 10;
-            var interval = Interval.M5;
-            var convert = new []{Currency.Usd};
 
             return int.TryParse(idOrSlug, out var id)
                 ? await GetAsync<ResponseMain<QuotesHistoricalData>>(
-                    ExchangeApiUrls.QuotesHistorical(id.ToString(), string.Empty, timeStart, timeEnd, count, interval,
-                        convert)).ConfigureAwait(false)
+                    ExchangeApiUrls.QuotesHistorical(id.ToString(), string.Empty, timeStart, timeEnd, null, string.Empty, 
+                        new[] { string.Empty })).ConfigureAwait(false)
                 : await GetAsync<ResponseMain<QuotesHistoricalData>>(
-                    ExchangeApiUrls.QuotesHistorical(string.Empty,idOrSlug , timeStart, timeEnd, count, interval,
-                        convert)).ConfigureAwait(false);
+                    ExchangeApiUrls.QuotesHistorical(string.Empty, idOrSlug, timeStart, timeEnd, null, string.Empty,
+                        new[] { string.Empty })).ConfigureAwait(false);
         }
 
         public async Task<ResponseMain<Dictionary<string, QuotesLatestData>>> GetQuotesLatest(string id, string slug,
@@ -107,12 +101,11 @@ namespace CoinMarketCapPro_API.Clients
 
         public async Task<ResponseMain<Dictionary<string, QuotesLatestData>>> GetQuotesLatest(string idOrSlug)
         {
-            var convert = new[] { Currency.Usd };
             return int.TryParse(idOrSlug, out var id)
                 ? await GetAsync<ResponseMain<Dictionary<string, QuotesLatestData>>>(
-                    ExchangeApiUrls.QuotesLatest(id.ToString(), string.Empty, convert)).ConfigureAwait(false)
+                    ExchangeApiUrls.QuotesLatest(id.ToString(), string.Empty, new[] { string.Empty })).ConfigureAwait(false)
                 : await GetAsync<ResponseMain<Dictionary<string, QuotesLatestData>>>(
-                    ExchangeApiUrls.QuotesLatest(string.Empty, idOrSlug, convert)).ConfigureAwait(false);
+                    ExchangeApiUrls.QuotesLatest(string.Empty, idOrSlug, new[] { string.Empty })).ConfigureAwait(false);
         }
     }
 }

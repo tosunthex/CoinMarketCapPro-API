@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using CoinMarketCapPro_API.Clients;
 using CoinMarketCapPro_API.Parameters;
+using FluentAssertions;
 using Xunit;
 
 namespace CoinMarketCap_Pro.Tests
@@ -19,9 +20,22 @@ namespace CoinMarketCap_Pro.Tests
         public async Task GlobalMetricsHistorical()
         {
             var result =
-                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsHistorical("2018-08-16T00:02:00.000Z", "2018-08-17T00:02:00.000Z", 10, Interval.Daily,
-                    new[] { Currency.Usd });
+                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsHistorical("2018-08-16T00:02:00.000Z",
+                    "2018-08-17T00:02:00.000Z", 10, Interval.Daily,
+                    new[] {Currency.Usd});
             Assert.Equal("USD",result.Data.Quotes.First().Quote.Keys.First());
+        }
+        [Fact]
+        public async Task GlobalMetricsHistorical_Default_Values()
+        {
+            var expected =
+                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsHistorical("2018-08-16T00:02:00.000Z",
+                    "2018-08-17T00:02:00.000Z", 10, Interval.Daily,
+                    new[] {Currency.Usd});
+            var actual =
+                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsHistorical("2018-08-16T00:02:00.000Z",
+                    "2018-08-17T00:02:00.000Z");
+            expected.Data.Should().BeEquivalentTo(actual.Data);
         }
         [Fact]
         public async Task GlobalMetricsLatest()
@@ -29,6 +43,15 @@ namespace CoinMarketCap_Pro.Tests
             var result =
                 await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsLatest(new[] { Currency.Usd });
             Assert.Equal("USD", result.Data.Quote.First().Key);
+        }
+        [Fact]
+        public async Task GlobalMetricsLatest_Default_Values()
+        {
+            var expected =
+                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsLatest(new[] { Currency.Usd });
+            var actual =
+                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsLatest();
+            expected.Data.Should().BeEquivalentTo(actual.Data);
         }
     }
 }

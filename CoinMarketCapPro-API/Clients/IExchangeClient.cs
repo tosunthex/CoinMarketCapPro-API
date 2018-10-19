@@ -41,7 +41,7 @@ namespace CoinMarketCapPro_API.Clients
         ///     determine your own pagination size.
         /// </param>
         /// <returns></returns>
-        Task<ResponseMain<MapData[]>> GetMap(string listingStatus, string slug, int start, int limit);
+        Task<ResponseMain<MapData[]>> GetMap(string listingStatus, string slug, int? start, int? limit);
 
         /// <summary>
         ///     Get a paginated list of all cryptocurrency exchanges with historical market data for a given point in time. Use the
@@ -92,7 +92,7 @@ namespace CoinMarketCapPro_API.Clients
         ///     additional call credit. Each conversion is returned in its own "quote" object
         /// </param>
         /// <returns></returns>
-        Task<ResponseMain<ListingsLatestData[]>> GetListingLatest(int start, int limit, string sortField,
+        Task<ResponseMain<ListingsLatestData[]>> GetListingLatest(int? start, int? limit, string sortField,
             string sortDir, string marketType, string[] convert);
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace CoinMarketCapPro_API.Clients
         ///     additional call credit.
         /// </param>
         /// <returns></returns>
-        Task<ResponseMain<MarketPairsLatestData>> GetMarketPairsLatest(string id, string slug, int start, int limit,
+        Task<ResponseMain<MarketPairsLatestData>> GetMarketPairsLatest(string id, string slug, int? start, int? limit,
             string[] convert);
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace CoinMarketCapPro_API.Services
             var urlParameters = new List<string>();
             foreach (var par in parameter)
             { 
-                urlParameters.Add(string.IsNullOrWhiteSpace(par.Value.ToString()) ? null : $"{par.Key}={par.Value}");
+                urlParameters.Add(par.Value == null || string.IsNullOrWhiteSpace(par.Value.ToString()) ? null : $"{par.Key}={par.Value}");
             }
 
             var encodedParams = urlParameters

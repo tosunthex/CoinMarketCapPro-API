@@ -17,7 +17,7 @@ namespace CoinMarketCapPro
             });
         }
 
-        public static Uri MapUri(string listingStatus, string slug, int start, int limit)
+        public static Uri MapUri(string listingStatus, string slug, int? start, int? limit)
         {
             return QueryStringService.CreateUrl($"{ExchangeApiPath}/map", new Dictionary<string, object>
             {
@@ -43,7 +43,7 @@ namespace CoinMarketCapPro
             });
         }
 
-        public static Uri ListingsLatest(int start, int limit, string sortField, string sortDir, string marketType,
+        public static Uri ListingsLatest(int? start, int? limit, string sortField, string sortDir, string marketType,
             string[] convert)
         {
             return QueryStringService.CreateUrl($"{ExchangeApiPath}/listings/latest", new Dictionary<string, object>
@@ -57,7 +57,7 @@ namespace CoinMarketCapPro
             });
         }
 
-        public static Uri MarketPairsLatest(string id, string slug, int start, int limit, string[] convert)
+        public static Uri MarketPairsLatest(string id, string slug, int? start, int? limit, string[] convert)
         {
             return QueryStringService.CreateUrl($"{ExchangeApiPath}/market-pairs/latest", new Dictionary<string, object>
             {
@@ -69,7 +69,7 @@ namespace CoinMarketCapPro
             });
         }
 
-        public static Uri QuotesHistorical(string id, string slug, string timeStart, string timeEnd, int count,
+        public static Uri QuotesHistorical(string id, string slug, string timeStart, string timeEnd, int? count,
             string interval, string[] convert)
         {
             return QueryStringService.CreateUrl($"{ExchangeApiPath}/quotes/historical", new Dictionary<string, object>

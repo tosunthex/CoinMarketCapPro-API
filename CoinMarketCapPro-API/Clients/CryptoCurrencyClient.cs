@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CoinMarketCapPro;
@@ -32,7 +33,7 @@ namespace CoinMarketCapPro_API.Clients
                     CryptoCurrencyApiUrls.MetadataUri(new[] {string.Empty}, idOrSymbol)).ConfigureAwait(false);
         }
 
-        public async Task<ResponseMain<IdMapData[]>> GetIdMap(string listingStatus, int start, int limit,
+        public async Task<ResponseMain<IdMapData[]>> GetIdMap(string listingStatus, int? start, int? limit,
             string[] symbol)
         {
             return await GetAsync<ResponseMain<IdMapData[]>>(
@@ -40,16 +41,22 @@ namespace CoinMarketCapPro_API.Clients
                 .ConfigureAwait(false);
         }
 
-        public async Task<ResponseMain<IdMapData[]>> GetIdMap(int limit, string[] symbol)
+        public async Task<ResponseMain<IdMapData[]>> GetIdMap(int? limit)
         {
-            const int start = 1;
             return await GetAsync<ResponseMain<IdMapData[]>>(
-                    CryptoCurrencyApiUrls.IdMapUri(ListingStatus.Active, start, limit, symbol))
+                    CryptoCurrencyApiUrls.IdMapUri(ListingStatus.Active, 1, limit, new[] { string.Empty }))
                 .ConfigureAwait(false);
         }
 
-        public async Task<ResponseMain<ListingHistoricalData[]>> GetListingsHistorical(string timestamp, int start,
-            int limit, string[] convert, string sortField, string sortDirection,
+        public async Task<ResponseMain<IdMapData[]>> GetIdMap(string[] symbol)
+        {
+            return await GetAsync<ResponseMain<IdMapData[]>>(
+                    CryptoCurrencyApiUrls.IdMapUri(ListingStatus.Active, 1, limit: null, symbol: symbol))
+                .ConfigureAwait(false);
+        }
+
+        public async Task<ResponseMain<ListingHistoricalData[]>> GetListingsHistorical(string timestamp, int? start,
+            int? limit, string[] convert, string sortField, string sortDirection,
             string cryptocurrencyType)
         {
             return await GetAsync<ResponseMain<ListingHistoricalData[]>>(
@@ -60,11 +67,11 @@ namespace CoinMarketCapPro_API.Clients
         public async Task<ResponseMain<ListingHistoricalData[]>> GetListingsHistorical(string timestamp, string[] convert)
         {
             return await GetAsync<ResponseMain<ListingHistoricalData[]>>(
-                CryptoCurrencyApiUrls.ListingHistoricalUri(timestamp, 1, 100, convert, SortField.MarketCap, SortDirection.Desc,
+                CryptoCurrencyApiUrls.ListingHistoricalUri(timestamp, null, null, convert, SortField.MarketCap, SortDirection.Desc,
                     CryptoCurrencyType.All)).ConfigureAwait(false);
         }
 
-        public async Task<ResponseMain<ListingLatestData[]>> GetListingLatest(int start, int limit, string[] convert,
+        public async Task<ResponseMain<ListingLatestData[]>> GetListingLatest(int? start, int? limit, string[] convert,
             string sortField, string sortDir,
             string cryptoCurrencyType)
         {
@@ -74,12 +81,12 @@ namespace CoinMarketCapPro_API.Clients
 
         public async Task<ResponseMain<ListingLatestData[]>> GetListingLatest()
         {
-            return await GetAsync<ResponseMain<ListingLatestData[]>>(CryptoCurrencyApiUrls.ListingLatestUri(1,
-                100, new []{ Currency.Usd }, SortField.MarketCap, SortDirection.Desc, CryptoCurrencyType.All)).ConfigureAwait(false);
+            return await GetAsync<ResponseMain<ListingLatestData[]>>(CryptoCurrencyApiUrls.ListingLatestUri(null,
+                null, new []{string.Empty}, string.Empty, string.Empty, string.Empty)).ConfigureAwait(false);
         }
 
-        public async Task<ResponseMain<MarketPairsLatestData>> GetMarketPairLatest(string id, string symbol, int start,
-            int limit, string[] convert)
+        public async Task<ResponseMain<MarketPairsLatestData>> GetMarketPairLatest(string id, string symbol, int? start,
+            int? limit, string[] convert)
         {
             return await GetAsync<ResponseMain<MarketPairsLatestData>>(
                 CryptoCurrencyApiUrls.LastestMarketPairsUri(id, symbol, start, limit, convert)).ConfigureAwait(false);
@@ -87,21 +94,19 @@ namespace CoinMarketCapPro_API.Clients
 
         public async Task<ResponseMain<MarketPairsLatestData>> GetMarketPairLatest(string idOrSymbol)
         {
-            const int start = 1;
-            const int limit = 100;
-            var convert = new[] { Currency.Usd };
+            var convert = new[] { "" };
 
             return int.TryParse(idOrSymbol, out var id)
                 ? await GetAsync<ResponseMain<MarketPairsLatestData>>(
-                        CryptoCurrencyApiUrls.LastestMarketPairsUri(id.ToString(), string.Empty, start, limit, convert))
+                        CryptoCurrencyApiUrls.LastestMarketPairsUri(id.ToString(), string.Empty, null, null, convert))
                     .ConfigureAwait(false)
                 : await GetAsync<ResponseMain<MarketPairsLatestData>>(
-                        CryptoCurrencyApiUrls.LastestMarketPairsUri(string.Empty, idOrSymbol, start, limit, convert))
+                        CryptoCurrencyApiUrls.LastestMarketPairsUri(string.Empty, idOrSymbol, null, null, convert))
                     .ConfigureAwait(false);
         }
 
         public async Task<ResponseMain<OhlcvHistoricalData>> GetOhlvcHistorical(string id, string symbol,
-            string timePeriod, string timeStart, string timeEnd, int count,
+            string timePeriod, string timeStart, string timeEnd, int? count,
             string interval, string[] convert)
         {
             return await GetAsync<ResponseMain<OhlcvHistoricalData>>(CryptoCurrencyApiUrls.HistoricalOhlcvUri(id,
@@ -112,14 +117,12 @@ namespace CoinMarketCapPro_API.Clients
         public async Task<ResponseMain<OhlcvHistoricalData>> GetOhlvcHistorical(string idOrSymbol, string timeStart, string timeEnd)
         {
             const string timePeriod = "daily";
-            const int count = 10;
-            var convert = new[] { Currency.Usd };
-            
+
             return int.TryParse(idOrSymbol, out var id)
                 ? await GetAsync<ResponseMain<OhlcvHistoricalData>>(CryptoCurrencyApiUrls.HistoricalOhlcvUri(id.ToString(),
-                string.Empty, timePeriod, timeStart, timeEnd, count, Interval.Daily, convert)).ConfigureAwait(false)
+                string.Empty, timePeriod, timeStart, timeEnd, null, Interval.Daily, new[] { string.Empty })).ConfigureAwait(false)
                 : await GetAsync<ResponseMain<OhlcvHistoricalData>>(CryptoCurrencyApiUrls.HistoricalOhlcvUri(string.Empty,
-                idOrSymbol, timePeriod, timeStart, timeEnd, 10, Interval.Daily, convert)).ConfigureAwait(false);
+                idOrSymbol, timePeriod, timeStart, timeEnd, null, Interval.Daily, new[] { string.Empty })).ConfigureAwait(false);
         }
 
         public async Task<ResponseMain<Dictionary<string, OhlcvLatestData>>> GetOhlcvLatest(string[] id, string[] symbol,
@@ -131,18 +134,17 @@ namespace CoinMarketCapPro_API.Clients
 
         public async Task<ResponseMain<Dictionary<string, OhlcvLatestData>>> GetOhlcvLatest(string[] idOrSymbol)
         {
-            var convert = new[] { Currency.Usd };
             return QueryStringService.IsIdOrString(idOrSymbol) == "Id"
                 ? await GetAsync<ResponseMain<Dictionary<string, OhlcvLatestData>>>(
-                        CryptoCurrencyApiUrls.LatestOhlcvUri(idOrSymbol, new[] {string.Empty}, convert))
+                        CryptoCurrencyApiUrls.LatestOhlcvUri(idOrSymbol, new[] {string.Empty}, new[] { string.Empty }))
                     .ConfigureAwait(false)
                 : await GetAsync<ResponseMain<Dictionary<string, OhlcvLatestData>>>(
-                        CryptoCurrencyApiUrls.LatestOhlcvUri(new[] {string.Empty}, idOrSymbol, convert))
+                        CryptoCurrencyApiUrls.LatestOhlcvUri(new[] {string.Empty}, idOrSymbol, new[] { string.Empty }))
                     .ConfigureAwait(false);
         }
 
         public async Task<ResponseMain<QuotesHistoricalData>> GetQuotesHistorical(string id, string symbol,
-            string timeStart, string timeEnd, int count, string interval,
+            string timeStart, string timeEnd, int? count, string interval,
             string[] convert)
         {
             return await GetAsync<ResponseMain<QuotesHistoricalData>>(
@@ -153,15 +155,13 @@ namespace CoinMarketCapPro_API.Clients
         public async Task<ResponseMain<QuotesHistoricalData>> GetQuotesHistorical(string idOrSymbol, string timeStart, string timeEnd)
         {
 
-            const int count = 10;
-            var convert = new[] { Currency.Usd };
             return int.TryParse(idOrSymbol, out var id)
                 ? await GetAsync<ResponseMain<QuotesHistoricalData>>(
-                    CryptoCurrencyApiUrls.HistoricalQuotesUri(id.ToString(), string.Empty, timeStart, timeEnd, count,
-                        Interval.M5, convert)).ConfigureAwait(false)
+                    CryptoCurrencyApiUrls.HistoricalQuotesUri(id.ToString(), string.Empty, timeStart, timeEnd, null,
+                        Interval.M5, new[] { string.Empty })).ConfigureAwait(false)
                 : await GetAsync<ResponseMain<QuotesHistoricalData>>(
-                    CryptoCurrencyApiUrls.HistoricalQuotesUri("", idOrSymbol, timeStart, timeEnd, count, Interval.M5,
-                        convert)).ConfigureAwait(false);
+                    CryptoCurrencyApiUrls.HistoricalQuotesUri("", idOrSymbol, timeStart, timeEnd, null, Interval.M5,
+                        new[] { string.Empty })).ConfigureAwait(false);
         }
 
         public async Task<ResponseMain<Dictionary<string, QuotesLatestData>>> GetQuotesLatest(string[] id, string[] symbol,
@@ -173,13 +173,12 @@ namespace CoinMarketCapPro_API.Clients
 
         public async Task<ResponseMain<Dictionary<string, QuotesLatestData>>> GetQuotesLatest(string[] idOrSymbol)
         {
-            string[] convert = new[] { Currency.Usd };
             return QueryStringService.IsIdOrString(idOrSymbol) == "Id"
                 ? await GetAsync<ResponseMain<Dictionary<string, QuotesLatestData>>>(
-                        CryptoCurrencyApiUrls.LatestQuotesUri(idOrSymbol, new[] {string.Empty}, convert))
+                        CryptoCurrencyApiUrls.LatestQuotesUri(idOrSymbol, new[] {string.Empty}, new[] { string.Empty }))
                     .ConfigureAwait(false)
                 : await GetAsync<ResponseMain<Dictionary<string, QuotesLatestData>>>(
-                        CryptoCurrencyApiUrls.LatestQuotesUri(new[] {string.Empty}, idOrSymbol, convert))
+                        CryptoCurrencyApiUrls.LatestQuotesUri(new[] {string.Empty}, idOrSymbol, new[] { string.Empty }))
                     .ConfigureAwait(false);
         }
     }

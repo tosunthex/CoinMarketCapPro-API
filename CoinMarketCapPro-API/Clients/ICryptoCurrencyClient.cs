@@ -54,7 +54,7 @@ namespace CoinMarketCapPro_API.Clients
         ///     If this option is passed, other options will be ignored.
         /// </param>
         /// <returns></returns>
-        Task<ResponseMain<IdMapData[]>> GetIdMap(string listingStatus, int start, int limit, string[] symbol);
+        Task<ResponseMain<IdMapData[]>> GetIdMap(string listingStatus, int? start, int? limit, string[] symbol);
 
         /// <summary>
         ///     Returns a paginated list of all cryptocurrencies by CoinMarketCap ID. We recommend using this convenience endpoint
@@ -71,12 +71,26 @@ namespace CoinMarketCapPro_API.Clients
         ///     Optionally specify the number of results to return. Use this parameter and the "start" parameter to
         ///     determine your own pagination size.
         /// </param>
+        /// <returns></returns>
+        Task<ResponseMain<IdMapData[]>> GetIdMap(int? limit);
+
+        /// <summary>
+        ///     Returns a paginated list of all cryptocurrencies by CoinMarketCap ID. We recommend using this convenience endpoint
+        ///     to lookup and utilize
+        ///     our unique cryptocurrency id across all endpoints as typical identifiers like ticker symbols can match multiple
+        ///     cryptocurrencies and
+        ///     change over time. As a convenience you may pass a comma-separated list of cryptocurrency symbols as symbol to
+        ///     filter this list to only
+        ///     those you require.
+        ///     This endpoint is available on the following API plans:Starter,Hobbyist,Standard,Professional,Enterprise
+        ///     Default Values: listing_status = true and start = 1
+        /// </summary>
         /// <param name="symbol">
         ///     Optionally pass a comma-separated list of cryptocurrency symbols to return CoinMarketCap IDs for.
         ///     If this option is passed, other options will be ignored.
         /// </param>
         /// <returns></returns>
-        Task<ResponseMain<IdMapData[]>> GetIdMap(int limit, string[] symbol);
+        Task<ResponseMain<IdMapData[]>> GetIdMap(string[] symbol);
 
         /// <summary>
         ///     Get a paginated list of all cryptocurrencies with market data for a given historical time. Use the "convert" option
@@ -107,7 +121,7 @@ namespace CoinMarketCapPro_API.Clients
         ///     Default: "all". Valid values: "all" "coins" "tokens" The type of cryptocurrency to include.
         /// </param>
         /// <returns></returns>
-        Task<ResponseMain<ListingHistoricalData[]>> GetListingsHistorical(string timestamp, int start, int limit,
+        Task<ResponseMain<ListingHistoricalData[]>> GetListingsHistorical(string timestamp, int? start, int? limit,
             string[] convert, string sortField, string sortDirection, string cryptocurrencyType);
 
         /// <summary>
@@ -146,7 +160,7 @@ namespace CoinMarketCapPro_API.Clients
         /// <param name="sortDir">The direction in which to order cryptocurrencies against the specified sort.</param>
         /// <param name="cryptoCurrencyType">The type of cryptocurrency to include.</param>
         /// <returns></returns>
-        Task<ResponseMain<ListingLatestData[]>> GetListingLatest(int start, int limit, string[] convert,
+        Task<ResponseMain<ListingLatestData[]>> GetListingLatest(int? start, int? limit, string[] convert,
             string sortField,string sortDir, string cryptoCurrencyType);
 
         /// <summary>
@@ -181,7 +195,7 @@ namespace CoinMarketCapPro_API.Clients
         ///     "quote" object. Default = "USD"
         /// </param>
         /// <returns></returns>
-        Task<ResponseMain<MarketPairsLatestData>> GetMarketPairLatest(string id, string symbol, int start, int limit,
+        Task<ResponseMain<MarketPairsLatestData>> GetMarketPairLatest(string id, string symbol, int? start, int? limit,
             string[] convert);
 
         /// <summary>
@@ -232,7 +246,7 @@ namespace CoinMarketCapPro_API.Clients
         /// </param>
         /// <returns></returns>
         Task<ResponseMain<OhlcvHistoricalData>> GetOhlvcHistorical(string id, string symbol, string timePeriod,
-            string timeStart, string timeEnd, int count, string interval, string[] convert);
+            string timeStart, string timeEnd, int? count, string interval, string[] convert);
 
         /// <summary>
         ///     Return an interval of historic OHLCV (Open, High, Low, Close, Volume) market quotes for a cryptocurrency.
@@ -318,7 +332,7 @@ namespace CoinMarketCapPro_API.Clients
         /// </param>
         /// <returns></returns>
         Task<ResponseMain<QuotesHistoricalData>> GetQuotesHistorical(string id, string symbol, string timeStart,
-            string timeEnd, int count, string interval, string[] convert);
+            string timeEnd, int? count, string interval, string[] convert);
 
         /// <summary>
         ///     Returns an interval of historic market quotes for any cryptocurrency based on time and interval parameters.

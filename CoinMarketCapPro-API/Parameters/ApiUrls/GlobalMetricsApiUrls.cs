@@ -8,7 +8,7 @@ namespace CoinMarketCapPro
     {
         private const string GlobalMetricApiPath = "v1/global-metrics";
 
-        public static Uri QuotesHistoricalUri(string timeStart, string timeEnd, int count, string interval,
+        public static Uri QuotesHistoricalUri(string timeStart, string timeEnd, int? count, string interval,
             string[] convert)
         {
             return QueryStringService.CreateUrl($"{GlobalMetricApiPath}/quotes/historical",

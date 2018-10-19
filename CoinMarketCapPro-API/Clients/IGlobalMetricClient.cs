@@ -35,7 +35,7 @@ namespace CoinMarketCapPro_API.Clients
         /// </param>
         /// <returns></returns>
         Task<ResponseMain<GlobalMetricsHistoricalData>> GetGlobalMetricsHistorical(string timeStart, string timeEnd,
-            int count, string interval, string[] convert);
+            int? count, string interval, string[] convert);
 
         /// <summary>
         ///     Get an interval of aggregate 24 hour volume and market cap data globally based on time and interval parameters.
