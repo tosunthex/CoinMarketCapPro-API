@@ -63,6 +63,13 @@ namespace CoinMarketCap_Pro.Tests
             Assert.Equal("USD",result.Data.First().Quote.First().Key);
         }
         [Fact]
+        public async Task Listings_Latest_Percent_Change_24H_Asc()
+        {
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetListingLatest(1, 2,
+                new[] { "USD" }, SortField.PercentChange24H, "", CryptoCurrencyType.All);
+            Assert.Equal("USD", result.Data.First().Quote.First().Key);
+        }
+        [Fact]
         public async Task Listing_Latest_Default_Parameters_Must_Give_Same_Result()
         {
             var expected = await _coinMarketCapClient.CryptoCurrencyClient.GetListingLatest(1, 100,

@@ -6,7 +6,7 @@ namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 {
     public class ListingLatestData : LastestDataDetail
     {
-        [JsonProperty("circulating_supply")] public double CirculatingSupply { get; set; }
+        [JsonProperty("circulating_supply")] public double? CirculatingSupply { get; set; }
 
         [JsonProperty("total_supply")] public double TotalSupply { get; set; }
 
