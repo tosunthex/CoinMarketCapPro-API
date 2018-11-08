@@ -8,7 +8,7 @@ namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
     {
         [JsonProperty("circulating_supply")] public double? CirculatingSupply { get; set; }
 
-        [JsonProperty("total_supply")] public double TotalSupply { get; set; }
+        [JsonProperty("total_supply")] public double? TotalSupply { get; set; }
 
         [JsonProperty("quote")] public Dictionary<string,Quote> Quote { get; set; }
     }

@@ -4,7 +4,7 @@ namespace CoinMarketCapPro_API.Models.Responses.CryptoCurrency
 {
     public class QuoteVolumePercent
     {
-        [JsonProperty("volume_24h")] public double Volume24H { get; set; }
+        [JsonProperty("volume_24h")] public double? Volume24H { get; set; }
 
         [JsonProperty("percent_change_1h")] public double? PercentChange1H { get; set; }
 

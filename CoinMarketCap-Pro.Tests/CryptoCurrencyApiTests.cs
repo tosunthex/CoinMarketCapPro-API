@@ -65,8 +65,8 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task Listings_Latest_Percent_Change_24H_Asc()
         {
-            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetListingLatest(1, 2,
-                new[] { "USD" }, SortField.PercentChange24H, "", CryptoCurrencyType.All);
+            var result = await _coinMarketCapClient.CryptoCurrencyClient.GetListingLatest(1, 100,
+                new[] { "USD" }, SortField.PercentChange24H, SortDirection.Asc, CryptoCurrencyType.All);
             Assert.Equal("USD", result.Data.First().Quote.First().Key);
         }
         [Fact]
