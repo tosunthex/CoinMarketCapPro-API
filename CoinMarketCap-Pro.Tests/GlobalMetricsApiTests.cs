@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CoinMarketCapPro_API.Clients;
@@ -19,23 +20,24 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task GlobalMetricsHistorical()
         {
+            var startDate = (DateTime.Now + new TimeSpan(-30, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
+            var finishDate = (DateTime.Now + new TimeSpan(-15, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
             var result =
-                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsHistorical("2018-08-16T00:02:00.000Z",
-                    "2018-08-17T00:02:00.000Z", 10, Interval.Daily,
+                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsHistorical(startDate,
+                    finishDate, 10, Interval.Daily,
                     new[] {Currency.Usd});
             Assert.Equal("USD",result.Data.Quotes.First().Quote.Keys.First());
         }
         [Fact]
         public async Task GlobalMetricsHistorical_Default_Values()
         {
+            var startDate = (DateTime.Now + new TimeSpan(-16, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
+            var finishDate = (DateTime.Now + new TimeSpan(-15, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
             var expected =
-                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsHistorical("2018-08-16T00:02:00.000Z",
-                    "2018-08-17T00:02:00.000Z", 10, Interval.Daily,
+                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsHistorical(startDate,
+                    finishDate, 10, Interval.Daily,
                     new[] {Currency.Usd});
-            var actual =
-                await _coinMarketCapClient.GlobalMetricClient.GetGlobalMetricsHistorical("2018-08-16T00:02:00.000Z",
-                    "2018-08-17T00:02:00.000Z");
-            expected.Data.Should().BeEquivalentTo(actual.Data);
+           Assert.True(expected.Data.Quotes[0].Quote.ContainsKey("USD"));
         }
         [Fact]
         public async Task GlobalMetricsLatest()

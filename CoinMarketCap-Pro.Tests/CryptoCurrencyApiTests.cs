@@ -1,3 +1,4 @@
+using System;
 using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
@@ -102,18 +103,22 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task OhlcvHistoricalForBtc()
         {
+            var startDate = (DateTime.Now + new TimeSpan(-18, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
+            var finishDate = (DateTime.Now + new TimeSpan(-15, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
             var result = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlvcHistorical("", "BTC", Interval.Daily,
-                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z", 10, Interval.Daily, new string[] {Currency.Usd});
+                startDate, finishDate, 10, Interval.Daily, new string[] {Currency.Usd});
             Assert.Equal(3, result.Data.Quotes.Length);
             Assert.Equal("BTC", result.Data.Symbol);
         }
         [Fact]
         public async Task Ohlcv_Historical_ForBtc_Default_Values()
         {
+            var startDate = (DateTime.Now + new TimeSpan(-18, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
+            var finishDate = (DateTime.Now + new TimeSpan(-15, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
             var expected = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlvcHistorical("", "BTC", Interval.Daily,
-                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z", 10, Interval.Daily, new string[] { Currency.Usd });
+                startDate, finishDate, 10, Interval.Daily, new string[] { Currency.Usd });
             var actual = await _coinMarketCapClient.CryptoCurrencyClient.GetOhlvcHistorical("BTC",
-                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z");
+                startDate, finishDate);
             expected.Data.Should().BeEquivalentTo(actual.Data);
         }
 
@@ -135,17 +140,21 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task QuotesHistoricalForBtc()
         {
+            var startDate = (DateTime.Now + new TimeSpan(-18, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
+            var finishDate = (DateTime.Now + new TimeSpan(-15, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
             var result = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesHistorical("", "BTC",
-                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z", 10, Interval.Daily, new[] {Currency.Usd});
+                startDate, finishDate, 10, Interval.Daily, new[] {Currency.Usd});
             Assert.Equal("Bitcoin",result.Data.Name);
         }
         [Fact]
         public async Task Quotes_Historical_ForBtc_Default_Values()
         {
+            var startDate = (DateTime.Now + new TimeSpan(-18, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
+            var finishDate = (DateTime.Now + new TimeSpan(-15, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
             var expected = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesHistorical("", "BTC",
-                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z", 10, Interval.M5, new[] {Currency.Usd});
+                startDate, finishDate, 10, Interval.M5, new[] {Currency.Usd});
             var actual = await _coinMarketCapClient.CryptoCurrencyClient.GetQuotesHistorical("BTC",
-                "2018-08-07T00:00:00.000Z", "2018-08-10T00:00:00.000Z");
+                startDate, finishDate);
             expected.Data.Should().BeEquivalentTo(actual.Data);
         }
 

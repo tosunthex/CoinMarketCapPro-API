@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CoinMarketCapPro_API.Clients;
@@ -71,17 +72,21 @@ namespace CoinMarketCap_Pro.Tests
         [Fact]
         public async Task QuotesHistorical()
         {
+            var startDate = (DateTime.Now + new TimeSpan(-16, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
+            var finishDate = (DateTime.Now + new TimeSpan(-15, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
             var result = await _coinMarketCapClient.ExchangeClient.GetQuotesHistorical("", "binance",
-                "2018-08-15T08:55:14.000Z", "2018-09-15T08:55:14.000Z", 1, "", new[] {Currency.Usd});
+                startDate, finishDate, 1, "", new[] {Currency.Usd});
             Assert.Equal("Binance",result.Data.Name);
         }
         [Fact]
         public async Task QuotesHistorical_Default_Values()
         {
+            var startDate = (DateTime.Now + new TimeSpan(-15, 0, 0, -1)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
+            var finishDate = (DateTime.Now + new TimeSpan(-15, 0, 0, 0)).ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'");
             var expected = await _coinMarketCapClient.ExchangeClient.GetQuotesHistorical("", "binance",
-                "2018-08-15T08:55:14.000Z", "2018-09-15T08:55:14.000Z", 1, "", new[] { Currency.Usd });
+                startDate, finishDate, 1, "", new[] { Currency.Usd });
             var actual = await _coinMarketCapClient.ExchangeClient.GetQuotesHistorical("binance",
-                "2018-08-15T08:55:14.000Z", "2018-09-15T08:55:14.000Z");
+                startDate, finishDate);
             expected.Data.Name.Should().BeEquivalentTo(actual.Data.Name);
         }
         
